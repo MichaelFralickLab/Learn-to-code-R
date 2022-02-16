@@ -50,11 +50,10 @@ Read these two papers and make a short list of their proposed rules.
 
 - Rstudio as your IDE. 
 - `tidyverse` for data munging.    
-- `tidymodels` for machine learning.  
 - `ggplot2` for basic plotting.
 - `patchwork` to combine basic plots.
 - `ggiraph` to make your ggplots interactive
 - `rmarkdown` to create static report files in html
 - `shiny` to create interactive apps 
-
+- `tidymodels` for machine learning
 

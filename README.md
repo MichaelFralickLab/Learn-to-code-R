@@ -31,3 +31,27 @@ Read these two papers and make a short list of their proposed rules.
 
 - Files have names. Always include the file path and name when referring to files.
 - Websites have URLS. Always include the url when referring to websites.
+
+
+## How to get help with issues
+
+- First do a google search! Include keywords: the language, library, and function you are using, as well as the error message.  
+- Try to reproduce and isolation the issue with a minimal dataset and with as little code as possible.
+  - Create a [reprex](https://reprex.tidyverse.org/) of your problem.  
+- If you can't solve your issue and it seems rather basic, try social media like reddit or twitter.   
+- If it is a more complex issue and the question isn't already on StackOverflow, post it there.   
+- Include as much information as possible
+- Discuss what you've tried already and what the output was
+
+## Your toolbox
+
+- Use R
+- Use tidyverse for data munging
+- Use tidymodels for machine learning
+- Use ggplot2 for basic plotting
+- Use patchwork to combine basic plots
+- Use ggiraph to make your ggplots interactive
+- Use rmarkdown to create static report files in html
+- Use shiny to create interactive apps 
+
+

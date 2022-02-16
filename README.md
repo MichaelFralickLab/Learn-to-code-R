@@ -5,8 +5,8 @@ An introduction to working with research data
 
 Read these two papers and make a short list of their proposed rules.
 
-- Broman
-- Bryan
+- [Data Organization in Spreadsheets](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989)  
+- [Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
 ## Data Commandments
 

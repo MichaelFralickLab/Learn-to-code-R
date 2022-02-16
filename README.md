@@ -46,24 +46,15 @@ Read these two papers and make a short list of their proposed rules.
 - Include as much information as possible!
 - Discuss what you've tried already and what the output was.
 
-## Your toolbox
+## Your R toolbox
 
-- Use R.
-- Use Rstudio as your IDE. 
-- Use `tidyverse` for data munging.    
-- Use `tidymodels` for machine learning.  
-- Use `ggplot2` for basic plotting.
-- Use `patchwork` to combine basic plots.
-- Use `ggiraph` to make your ggplots interactive
-- Use `rmarkdown` to create static report files in html
-- Use `shiny` to create interactive apps 
+- Rstudio as your IDE. 
+- `tidyverse` for data munging.    
+- `tidymodels` for machine learning.  
+- `ggplot2` for basic plotting.
+- `patchwork` to combine basic plots.
+- `ggiraph` to make your ggplots interactive
+- `rmarkdown` to create static report files in html
+- `shiny` to create interactive apps 
 
-## Why not python
-
-- R was designed for data analysis and statistics
-- R's package management is better than python's
-- ggplot2 is better than python offerings
-- Rmarkdown is better than Jupyter
-- Shiny is better than Dash
-- Rstudio is a better editor than VScode
 

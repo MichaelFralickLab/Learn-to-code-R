@@ -1,4 +1,5 @@
-# super-harsh-guide-to-reserach-data-analysis
+# Super-harsh guide to research data analysis
+  
 An introduction to working with research data
 
 ## Read This

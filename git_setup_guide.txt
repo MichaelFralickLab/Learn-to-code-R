@@ -1,0 +1,31 @@
+# Setting up git on new computer
+# already have git installed but not configured
+# https://kbroman.org/github_tutorial/pages/first_time.html
+
+# add username and email
+git config --global user.name "jmoggridge"
+git config --global user.email "ja.moggridge@gmail.com"
+
+git config --global color.ui true
+git config --global core.editor emacs
+
+# check for ssh keys
+cat ~/.ssh/id_rsa    
+cat ~/.ssh/id_rsa.pub
+
+# they're already there
+# copy to clipboard with:
+pbcopy < ~/.ssh/id_rsa.pub
+
+# go to personal github settings online
+# find SSH and GPG keys page
+# add new SSH key
+# called 'My mac m1'
+# paste in key from clipboard
+
+
+# In a terminal/shell, type the following to test it:
+ssh -T git@github.com
+
+# Reply is: "Hi jmoggridge! You've successfully authenticated, but GitHub does not provide shell access."
+

@@ -29,5 +29,11 @@ Read these two papers and make a short list of their proposed rules.
 
 ## How to talk about data
 
-- Files have names. Always include the file path and name when referring to files.
-- Websites have URLS. Always include the url when referring to websites.
+- Files have names. Always include the file path and name when referring to files so the other person can find the exact file.
+- Websites have URLS. Always include the URL when referring to websites.
+- Put quotes around variable names. "There are 5 unique values for 'my_variable'"
+- Put quotes around text from data. "The observation id is 'xt304'".
+
+
+
+

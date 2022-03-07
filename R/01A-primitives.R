@@ -1,8 +1,9 @@
-
+### Lesson 1
 
 # spend 5 mins making sure R + Rstudio are setup for everyone
 
 ## lets talk about primitives (5 min)
+
 
 ## Missing values ---------------------------------------------------------
 
@@ -10,7 +11,6 @@
 x <- NULL      # empty list in place of a list.
 y <- NA        # single missing value in place of a value.
 z <- NaN       # not-a-number in place of a numeric value.
-
 
 
 # booleans ----------------------------------------------------------------

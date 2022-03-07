@@ -48,7 +48,7 @@ rm(penguins)
 #' `readr::read_*` family of functions
 penguins <- read_csv('data/penguins.csv', skip = 0, trim_ws = T)
 
-##' Inspect dataset ----------------------------------------------------
+##' Inspect dataset ---------------------------------------------------
 
 #' glimpse - get a look at that data structure
 glimpse(penguins)
@@ -262,21 +262,19 @@ penguins |>
   geom_violin()
 
 # fit lines from geom_smooth()
-penguins |>
-  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point(size = 1.5, alpha = 0.7) +
-  geom_smooth(method = 'lm', se = T)
-
-# facets -> split panels by value.
 my_plot <- penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point(size = 1.5, alpha = 0.7) +
   geom_smooth(method = 'lm', se = F)
+my_plot
 
+# facets -> split panels by value.
 my_plot <- my_plot + facet_wrap(~island)
+my_plot
 
 # scales - set axis / color scales...
 my_plot <- my_plot + rcartocolor::scale_color_carto_d(palette = 4)
+my_plot
 
 # labs
 my_plot <- my_plot +
@@ -287,8 +285,69 @@ my_plot <- my_plot +
     title = "Palmer-penguins",
     subtitle = "Bill measurements for penguins in the Palmer archipelago, Antarctica"
   )
+my_plot
 
-my_plot + theme_bw()
+# preset themes
+my_plot <- my_plot + theme_bw()
+my_plot
+
+# customizing theme ----
+
+library(showtext) # functions for managing fonts...
+
+# https://fonts.google.com/
+font_add_google("Lobster")
+font_add_google("IBM Plex Sans")
+font_add_google("Roboto")
+
+theme_lobster <- function(){
+  theme(
+    text = element_text(family = 'Roboto'),
+    plot.title = element_text(family = 'Lobster', face = 'bold', size = 16),
+    plot.subtitle = element_text(family = 'IBM Plex Sans', face = 'italic', size = 10),
+    legend.position = 'bottom',
+    axis.title = element_text(color = 'grey60', size = 9),
+    axis.text = element_text(color = 'grey60', size = 7),
+    legend.text = element_text(family = 'Lobster', size = 12),
+    strip.background = element_rect(fill = 'grey95'),
+    strip.text = element_text(family = 'Roboto', size = 12)
+  )
+}
+
+my_plot + theme_lobster()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

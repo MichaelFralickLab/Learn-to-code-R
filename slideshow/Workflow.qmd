@@ -1,0 +1,216 @@
+---
+title: "Data Analysis Workflow<hr>📈📉📊"
+author: "Jason Moggridge"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    theme: default
+editor: source
+---
+
+## Typical analysis workflow
+
+<hr>
+
+<br>
+
+<img src="https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png" alt="workflow"/>
+
+## Data-driven analysis workflow
+
+<hr>
+
+```{r}
+htmltools::img(
+  src = "https://teachdatascience.com/post/tidyverse/tidyverse-package-workflow.png",
+  width = '90%'
+)
+```
+
+----
+
+<br><br>
+
+> 80% of data analysis is spent on the cleaning and preparing data
+
+-- Traditional
+
+## Tidyverse
+
+<hr>
+
+A series of software packages with a shared philosophy
+
+::: {#tidyverse .columns}
+::: {.column width="40%"}
+```{r fig.align='center', fig.width=4}
+htmltools::img(
+  src="https://tidyverse.tidyverse.org/logo.png",
+  alt = "Tidyverse",
+  width = "100%"
+)
+
+```
+:::
+
+::: {.column width="58%"}
+```{r fig.align='center', fig.width=4}
+htmltools::img(
+  src="https://camo.githubusercontent.com/8800adfd3928a66d017b1aab28d5479a4f000d38ff4a49299d8417313873efff/68747470733a2f2f692e696d6775722e636f6d2f677965596c6b4c2e706e67",
+  alt = "Tidyverse"
+)
+
+```
+:::
+:::
+
+## Tidy data manifesto
+
+<hr>
+
+<br>
+
+> __*Tidy*__ datasets ... have a **specific structure**:\
+> 1. each __*variable*__ is a __column__,\
+> 2. each __*observation*__ is a __row__, and\
+> 3. each __*type*__ of observational unit is a __table__
+
+<br>
+
+**Hadley Wickham** in 'Tidy Data' *J Stat Softw* (2014) <https://www.jstatsoft.org/article/view/v059i10>
+
+## Tidy data...
+<hr>
+
+Tidy data is all alike.
+
+`iris` has sepal & petal dimensions and species (columns) for 150 flowers (rows)
+
+```{r}
+#| echo: TRUE
+str(iris)
+```
+
+
+## Untidy
+
+<hr>
+
+`volcano` has topographic information for Maunga Whau on a 10m by 10m grid.
+
+```{r}
+#| echo: TRUE
+str(volcano)
+```
+
+
+## Transform & Tidy Data
+
+<hr>
+
+-   `dplyr` for table operations
+-   `tidyr` to reshape data
+-   `stringr` for text and regular expressions
+-   `forcats` for factors
+-   `lubridate` for datetimes
+
+## Dplyr
+
+
+::::{.columns}
+:::{.column}
+```{r}
+htmltools::img(src="https://swcarpentry.github.io/r-novice-gapminder/fig/13-dplyr-fig1.png")
+```
+:::
+:::{.column}
+
+<br>
+<br>
+
+```{r}
+#| echo = TRUE
+library(dplyr)
+iris |> 
+  select(Species, Petal.Length) |>
+  str()
+```
+:::
+::::
+
+
+## Cheatsheets
+
+<hr>
+
+:::{.center}
+
+```{r}
+htmltools::img(
+  src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-transformation.png", 
+  style = 'float: right;padding-right:150px; width: 900px;')
+```
+
+:::
+
+## Pipes: `|>` or `%>%`
+
+<hr>
+
+>*Bob brushes his teeth*
+
+<br>
+
+We could put Bob inside `brush()` (like cavemen)
+  
+  > `brush(who = Bob, what = teeth)`
+
+<br>
+
+better - by **piping** Bob into `brush()`
+   
+  > `Bob |> brush(what = teeth)`
+
+## Pipes: `|>` or `%>%`
+
+<hr>
+
+*Bob brushes his teeth, then washes his face*
+
+> `wash(brush(Bob, teeth), face)`
+
+read from inside to outside (unnatural) 
+  
+<br>
+
+> `Bob |> brush(teeth) |> wash(face)`
+
+read left to right (natural)  
+
+
+## `ggplot2` <br> The layered grammar of graphics
+
+<br>
+
+:::: {.columns}
+:::{.column width="45%"}
+
+```{r }
+#| echo = TRUE
+library(ggplot2)
+iris |> 
+  ggplot(aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  geom_smooth(method = 'lm', se = 'F')
+```
+
+:::
+:::{.column width="55%"}
+:::
+::::
+
+## Model
+
+## Iterate
+
+## Communicate

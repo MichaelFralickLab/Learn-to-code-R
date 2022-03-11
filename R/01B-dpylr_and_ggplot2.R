@@ -1,24 +1,32 @@
 ## Welcome to Tutorial 1 - Table Operations! -----
 
-#' this tutorial introduces the reader to data analysis with the `tidyverse` family of packages.
-#' We start with reading and writing data and performing basic table operations, then move towards manipulating and summarizing data for tables and figures.
-
-#' For `dplyr`, we will:
-#'
-#'
-#' - Modify and Create data with `mutate()`
-#' - Reduce multiple values to a single result with `summarise()`
-
-
-#' __This text means: 'Now you give it a try!'__
-
-
 ### install these packages if you don't already have them
 # install.packages('tidyverse')
 # install.packages('palmerpenguins')
 # install.packages('skimr')
 # install.packages('janitor')
 # install.packages('rcartocolor')
+
+
+#' this tutorial introduces the reader to data analysis with the `tidyverse` family of packages.
+#' We start with reading and writing data and performing basic table operations, then transform  and summarize data for tables and figures.
+
+#' We'll use `readr::` functions for In / Out
+#'
+#' For `dplyr`, we will:
+#'
+#' - Pick columns with `select()`
+#' - subset rows with `filter()` and `slice()`
+#' - Modify and Create data with `mutate()`
+#' - Reduce multiple values to a single result with `summarise()`
+#' - Split data with `group_by()`
+#' - remove duplicates with `distinct()`
+#' - sort tables with `arrange()`
+
+
+#' __This text means: 'Now you give it a try!'__
+
+
 
 
 ## setup -------------------------------------------------------------

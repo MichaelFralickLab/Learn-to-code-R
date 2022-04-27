@@ -4,12 +4,12 @@
   <meta name="generator" content="quarto-0.9.16">
   <meta name="author" content="Jason Moggridge">
   <meta name="dcterms.date" content="2022-04-26">
-  <title>quarto-input53e1f1ee</title>
+  <title>quarto-input04639c4a</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Workflow_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Workflow_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Pitch_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Pitch_files/libs/revealjs/dist/reveal.css">
   <style>
     .reveal .sourceCode {  /* see #7635 */
       overflow: visible;
@@ -84,19 +84,19 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="Workflow_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="Pitch_files/libs/revealjs/dist/theme/quarto.css" id="theme">
 
-  <script src="Workflow_files/libs/clipboard/clipboard.min.js"></script>
-  <script src="Workflow_files/libs/quarto-html/tabby.min.js"></script>
-  <script src="Workflow_files/libs/quarto-html/popper.min.js"></script>
-  <script src="Workflow_files/libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="Workflow_files/libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="Workflow_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="Workflow_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-  <link href="Workflow_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Workflow_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Workflow_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Workflow_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <script src="Pitch_files/libs/clipboard/clipboard.min.js"></script>
+  <script src="Pitch_files/libs/quarto-html/tabby.min.js"></script>
+  <script src="Pitch_files/libs/quarto-html/popper.min.js"></script>
+  <script src="Pitch_files/libs/quarto-html/tippy.umd.min.js"></script>
+  <link href="Pitch_files/libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="Pitch_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+  <link href="Pitch_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link href="Pitch_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Pitch_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Pitch_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Pitch_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,363 +394,171 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Intro to R
+  <h1 class="title">Dear Excel,
 <hr>
-📈📉📊
 </h1><h3>
-Data Analysis Workflow
+R for Data Analysis
+</h3>
+<h3>
+💔
 </h3>
   <p class="author">Jason Moggridge</p>
   <p class="date">2022-04-26</p>
 </section>
 
-<section id="r" class="slide level2">
-<h2><code>R</code></h2>
+<section>
+<section id="its-not-excel-its-me" class="title-slide slide level1 center">
+<h1>It’s not Excel, it’s me…</h1>
+
+</section>
+<section id="hi-im-jason-moggridge" class="slide level2">
+<h2>Hi, I’m Jason Moggridge</h2>
+<hr>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>JasonMoggridge <span class="ot">&lt;-</span> <span class="fu">data_analyst</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="at">institute =</span> <span class="st">"LTRI, Mt. Sinai Hospital"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">pi        =</span> <span class="st">"Dr. Michael Fralick"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="at">masters   =</span> <span class="st">"Bioinformatics, UofGuelph"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">bachelors =</span> <span class="st">"Biochemistry, Carleton"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">interests =</span> <span class="st">"Biology | coding | data science"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="at">cats      =</span> <span class="dv">2</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="at">languages =</span> <span class="fu">list</span>(<span class="st">'python'</span>, <span class="st">'R'</span>, <span class="st">'sh'</span>, <span class="st">'...'</span>),</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="at">needs_fulfilled_by_excel =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="my-needs-are-different-now" class="slide level2">
+<h2>My needs are different now…</h2>
+<hr>
+<div>
+<ul>
+<li class="fragment"><p>Bigger data</p></li>
+<li class="fragment"><p>More powerful analyses</p></li>
+<li class="fragment"><p>Interactive visualizations</p></li>
+<li class="fragment"><p>Better reproducibilty and automation</p></li>
+<li class="fragment"><p>Coding is the best way to do this</p></li>
+</ul>
+</div>
+</section>
+<section id="coding-as-a-practical-skill-for-everyone" class="slide level2">
+<h2>Coding as a practical skill for everyone</h2>
+<hr>
+<ul>
+<li>data is everywhere</li>
+<li>use code as a force multiplier</li>
+<li>automate trivial tasks</li>
+</ul>
+</section>
+<section id="create-a-foundation-for-learning" class="slide level2">
+<h2>Create a foundation for learning</h2>
+<hr>
+<ul>
+<li>statistics / machine learning</li>
+<li>data-mining</li>
+<li>domain-specific analytics</li>
+<li>web development</li>
+<li>software engineering</li>
+</ul>
+</section>
+<section id="why-r" class="slide level2">
+<h2>Why R?</h2>
+<hr>
+<div>
 <ul>
 <li class="fragment"><p>a high-level, no-boilerplate, interactive language</p></li>
-<li class="fragment"><p>open source</p></li>
+<li class="fragment"><p>open source &amp; free</p></li>
 <li class="fragment"><p>statistical features</p></li>
-<li class="fragment"><p>packages for everything</p></li>
 <li class="fragment"><p>great for research</p></li>
+<li class="fragment"><p>active development community</p></li>
+<li class="fragment"><p>packages for everything</p></li>
 </ul>
+</div>
 </section>
 <section id="typical-analysis-workflow" class="slide level2">
 <h2>Typical analysis workflow</h2>
 <hr>
-<p><br></p>
+<p>We can do it all in R <br></p>
 
 <img src="https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png" alt="workflow" class="r-stretch"></section>
-<section id="section" class="slide level2">
-<h2><br><br></h2>
-<blockquote>
-<p>80% of data analyst’s time is spent cleaning and preparing data</p>
-</blockquote>
-<p>– Ancient proverb</p>
-</section>
 <section id="tidyverse" class="slide level2">
 <h2>Tidyverse</h2>
 <hr>
 <p>A collection of R packages with a shared design philosophy.</p>
 <div id="tidyverse" class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:30%;">
+
+</div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="https://tidyverse.tidyverse.org/logo.png" alt="Tidyverse" width="100%" fit="cover"></p>
-</div>
-</div>
-</div><div class="column" style="width:55%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<p><img src="https://camo.githubusercontent.com/8800adfd3928a66d017b1aab28d5479a4f000d38ff4a49299d8417313873efff/68747470733a2f2f692e696d6775722e636f6d2f677965596c6b4c2e706e67" alt="Tidyverse" width="100%" fit="cover"></p>
+<p><img src="https://tidyverse.tidyverse.org/logo.png" alt="Tidyverse" width="50%" align="center" fit="cover"></p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="basic-r-code" class="slide level2">
-<h2>Basic R code</h2>
-<ul>
-<li class="fragment">data or ‘objects’</li>
-<li class="fragment">assign to an ‘object’ with <code>&lt;-</code></li>
-<li class="fragment">use functions to do stuff <code>function()</code></li>
-</ul>
-<p><em>🤖 Bob the robot brushes his teeth, then washes his face</em></p>
-<blockquote>
-<p><code>Bob &lt;- brush(data = Bob, what = teeth)</code> <code>Bob &lt;- wash(data = Bob, what = face)</code></p>
-</blockquote>
-</section>
-<section id="basic-r" class="slide level2">
-<h2>Basic R</h2>
-<p>don’t need arguments (implicit from ordering)</p>
-<blockquote>
-<p><code>Bob &lt;- brush(Bob, teeth)</code> <code>Bob &lt;- wash(Bob, face)</code></p>
-</blockquote>
-</section>
-<section id="pipes" class="slide level2">
-<h2>Pipes: <code>|&gt;</code></h2>
-<hr>
-<blockquote>
-<p>🤖 Bob the robot brushes his teeth, then washes his face</p>
-</blockquote>
-<p>with nesting, we read from inside to outside (unnatural)</p>
-<div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">wash</span>(<span class="fu">brush</span>(Bob, <span class="at">what =</span> teeth), <span class="at">what =</span> face)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<p>with pipes, we read left to right (natural)</p>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>Bob <span class="sc">|&gt;</span> <span class="fu">brush</span>(<span class="at">what =</span> teeth) <span class="sc">|&gt;</span> <span class="fu">wash</span>(<span class="at">what =</span> face)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li class="fragment"><strong>|&gt; passes data (Bob) as first argument to the next function</strong></li>
-</ul>
-</section>
-<section id="tidyverse-1" class="slide level2">
-<h2>Tidyverse</h2>
-<div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-✓ tibble  3.1.6     ✓ dplyr   1.0.7
-✓ tidyr   1.1.3     ✓ stringr 1.4.0
-✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-</div>
-</div>
-</section>
-<section id="data-driven-analysis-workflow" class="slide level2">
-<h2>Data-driven analysis workflow</h2>
+<section id="documentation" class="slide level2">
+<h2>Documentation</h2>
 <hr>
 
-<img data-src="packages.png" width="667" class="r-stretch quarto-figure-center"></section>
-<section id="tidy-data-manifesto" class="slide level2">
-<h2>Tidy data manifesto</h2>
-<hr>
-<p><br></p>
-<blockquote>
-<p><strong><em>Tidy</em></strong> datasets … have a <strong>specific structure</strong>:<br>
-1. each <strong><em>variable</em></strong> is a <strong>column</strong>,<br>
-2. each <strong><em>observation</em></strong> is a <strong>row</strong>, and<br>
-3. each <strong><em>type</em></strong> of observational unit is a <strong>table</strong></p>
-</blockquote>
-<p><br></p>
-<p><strong>Hadley Wickham</strong> in ‘Tidy Data’ <em>J Stat Softw</em> (2014) <a href="https://www.jstatsoft.org/article/view/v059i10" class="uri">https://www.jstatsoft.org/article/view/v059i10</a></p>
-</section>
-<section id="tidy-data" class="slide level2">
-<h2>Tidy data…</h2>
-<hr>
-<p>Tidy data is all alike.</p>
-<p><code>heartdisease</code> has 10 variables (columns) for 918 patients (rows)</p>
-<div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>heart_disease <span class="ot">&lt;-</span> MLDataR<span class="sc">::</span>heartdisease <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>Rows: 918
-Columns: 10
-$ Age              &lt;dbl&gt; 40, 49, 37, 48, 54, 39, 45, 54, 37, 48, 37, 58, 39, 4…
-$ Sex              &lt;chr&gt; "M", "F", "M", "F", "M", "M", "F", "M", "M", "F", "F"…
-$ RestingBP        &lt;dbl&gt; 140, 160, 130, 138, 150, 120, 130, 110, 140, 120, 130…
-$ Cholesterol      &lt;dbl&gt; 289, 180, 283, 214, 195, 339, 237, 208, 207, 284, 211…
-$ FastingBS        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ RestingECG       &lt;chr&gt; "Normal", "Normal", "ST", "Normal", "Normal", "Normal…
-$ MaxHR            &lt;dbl&gt; 172, 156, 98, 108, 122, 170, 170, 142, 130, 120, 142,…
-$ Angina           &lt;chr&gt; "N", "N", "N", "Y", "N", "N", "N", "N", "Y", "N", "N"…
-$ HeartPeakReading &lt;dbl&gt; 0.0, 1.0, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0, 1.5, 0.0, 0.0…
-$ HeartDisease     &lt;dbl&gt; 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0,…</code></pre>
-</div>
-</div>
-</section>
-<section id="transform-tidy-data" class="slide level2">
-<h2>Transform &amp; Tidy Data</h2>
-<hr>
-<ul>
-<li class="fragment"><code>dplyr</code> for table operations</li>
-<li class="fragment"><code>tidyr</code> to reshape data</li>
-<li class="fragment"><code>stringr</code> for text and regular expressions</li>
-<li class="fragment"><code>forcats</code> for factors</li>
-<li class="fragment"><code>lubridate</code> for datetimes</li>
-</ul>
-</section>
-<section id="dplyr-select" class="slide level2">
-<h2>Dplyr <code>select</code></h2>
-<p>Gets a subset of columns from the data.</p>
-<div class="column">
-<div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>htmltools<span class="sc">::</span><span class="fu">img</span>(<span class="at">src=</span><span class="st">"https://swcarpentry.github.io/r-novice-gapminder/fig/13-dplyr-fig1.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="https://swcarpentry.github.io/r-novice-gapminder/fig/13-dplyr-fig1.png"></p>
-</div>
-</div>
-</div>
-<p><br> <br></p>
-</section>
-<section id="dplyr-select-1" class="slide level2">
-<h2>Dplyr <code>select</code></h2>
-<p><br></p>
-<p>Gets a subset of columns from the data.</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># select columns using names</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>heart_disease <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">select</span>(Age, Sex, HeartDisease) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>Rows: 918
-Columns: 3
-$ Age          &lt;dbl&gt; 40, 49, 37, 48, 54, 39, 45, 54, 37, 48, 37, 58, 39, 49, 4…
-$ Sex          &lt;chr&gt; "M", "F", "M", "F", "M", "M", "F", "M", "M", "F", "F", "M…
-$ HeartDisease &lt;dbl&gt; 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, …</code></pre>
-</div>
-</div>
-<p><br></p>
-</section>
-<section id="dplyr-filter" class="slide level2">
-<h2>Dplyr <code>filter</code></h2>
-<p><br></p>
-<p>Subsets rows from the data passing a given condition.</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>heart_disease <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">'F'</span>, Cholesterol <span class="sc">&gt;</span> <span class="dv">200</span>) <span class="sc">|&gt;</span>    <span class="co"># subset rows</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>Rows: 150
-Columns: 10
-$ Age              &lt;dbl&gt; 48, 45, 48, 37, 42, 54, 43, 43, 49, 53, 41, 48, 54, 5…
-$ Sex              &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F", "F", "F"…
-$ RestingBP        &lt;dbl&gt; 138, 130, 120, 130, 115, 120, 120, 100, 124, 113, 110…
-$ Cholesterol      &lt;dbl&gt; 214, 237, 284, 211, 211, 273, 201, 223, 201, 468, 250…
-$ FastingBS        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ RestingECG       &lt;chr&gt; "Normal", "Normal", "Normal", "Normal", "ST", "Normal…
-$ MaxHR            &lt;dbl&gt; 108, 170, 120, 142, 137, 150, 165, 142, 164, 127, 142…
-$ Angina           &lt;chr&gt; "Y", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N"…
-$ HeartPeakReading &lt;dbl&gt; 1.5, 0.0, 0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0…
-$ HeartDisease     &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,…</code></pre>
-</div>
-</div>
-</section>
-<section id="dplyr-mutate" class="slide level2">
-<h2>Dplyr <code>mutate</code></h2>
-<p><br></p>
-<p>Creates new column or modifies an existing column given an expression.</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>heart_disease <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">select</span>(Cholesterol) <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">Cholesterol_g =</span> Cholesterol <span class="sc">/</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 6 × 2
-  Cholesterol Cholesterol_g
-        &lt;dbl&gt;         &lt;dbl&gt;
-1         289         0.289
-2         180         0.18 
-3         283         0.283
-4         214         0.214
-5         195         0.195
-6         339         0.339</code></pre>
-</div>
-</div>
-<ul>
-<li class="fragment">Mutate automatically applies the given expression to each row!</li>
-</ul>
-</section>
-<section id="dplyr-summarise" class="slide level2">
-<h2>Dplyr <code>summarise</code></h2>
-<p><br></p>
-<p>Like mutate, but for expressions that takes a group of values and return a single result.</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>heart_disease <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">summarise</span>(<span class="at">Cholesterol_mean =</span> <span class="fu">mean</span>(Cholesterol),</span>
-<span id="cb16-3"><a href="#cb16-3"></a>            <span class="at">Cholesterol_sd =</span> <span class="fu">sd</span>(Cholesterol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  Cholesterol_mean Cholesterol_sd
-             &lt;dbl&gt;          &lt;dbl&gt;
-1             199.           109.</code></pre>
-</div>
-</div>
-</section>
+<img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-transformation.png" style="float: right;padding-right:150px; width: 800px;" class="r-stretch"></section></section>
 <section>
-<section id="hold-on-to-your-butts" class="title-slide slide level1 center">
-<h1>Hold on to your butts</h1>
+<section id="what-well-do" class="title-slide slide level1 center">
+<h1>What we’ll do:</h1>
 
 </section>
-<section id="dplyr-group-by" class="slide level2">
-<h2>dplyr <code>group-by</code></h2>
-<p>Splits the data so that summarise computes multiple results.</p>
-<div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>heart_disease <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">summarise</span>(<span class="at">Cholesterol_mean =</span> <span class="fu">mean</span>(Cholesterol),</span>
-<span id="cb18-4"><a href="#cb18-4"></a>            <span class="at">Cholesterol_sd =</span> <span class="fu">sd</span>(Cholesterol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 3
-  Sex   Cholesterol_mean Cholesterol_sd
-  &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt;
-1 F                 241.           85.2
-2 M                 188.          112. </code></pre>
-</div>
-</div>
-</section>
-<section id="cheatsheets" class="slide level2">
-<h2>Cheatsheets</h2>
+<section id="perform-data-analyses" class="slide level2">
+<h2>Perform data analyses</h2>
 <hr>
-<div class="center">
-<div class="cell">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>htmltools<span class="sc">::</span><span class="fu">img</span>(</span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="at">src=</span><span class="st">"https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-transformation.png"</span>, </span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="at">style =</span> <span class="st">'float: right;padding-right:150px; width: 900px;'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-</div>
-<!-- ## Pipes: `|>` or `%>%` -->
-<!-- <hr> -->
-<!-- > *Bob brushes his teeth* -->
-<!-- <br> -->
-<!-- We could put Bob inside `brush()` -->
-<!-- > `brush(who = Bob, what = teeth)` -->
-<!-- <br> -->
-<!-- better - by **piping** Bob into `brush()` -->
-<!-- > `Bob |> brush(what = teeth)` -->
-<img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-transformation.png" style="float: right;padding-right:150px; width: 900px;" class="r-stretch"></section>
-<section id="ggplot2-the-layered-grammar-of-graphics" class="slide level2">
-<h2><code>ggplot2</code> <br> The layered grammar of graphics</h2>
-<p><br></p>
-<div class="columns">
-<div class="column" style="width:45%;">
-<div class="cell">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>iris <span class="sc">|&gt;</span> </span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="Workflow_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
-</div>
-</div>
-</div><div class="column" style="width:55%;">
-
-</div>
-</div>
+<ul>
+<li>Explore, model, and simulate data</li>
+<li>Create summary tables
+<ul>
+<li>‘Table 1’</li>
+</ul></li>
+<li>Scientific figures</li>
+</ul>
 </section>
-<section id="model" class="slide level2">
-<h2>Model</h2>
+<section id="create-reproducible-workflows" class="slide level2">
+<h2>Create reproducible workflows</h2>
+<hr>
+<ul>
+<li>Best practices</li>
+<li>String interpolation</li>
+<li>Version control</li>
+</ul>
 </section>
-<section id="iterate" class="slide level2">
-<h2>Iterate</h2>
-</section>
-<section id="communicate" class="slide level2">
-<h2>Communicate</h2>
-<div class="footer footer-default">
-
-</div>
+<section id="communicate-and-publish" class="slide level2">
+<h2>Communicate and Publish</h2>
+<hr>
+<ul>
+<li><code>Rmarkdown</code> for presenting prose, figures, and code</li>
+<li>Interactive figures for dashboards</li>
+<li>Collaborate on projects with Github</li>
+</ul>
 </section></section>
+<section id="join-us" class="title-slide slide level1 center">
+<h1>Join Us!</h1>
+
+<img data-src="images/friends.png" class="r-stretch"><div class="footer footer-default">
+
+</div>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Workflow_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Pitch_files/libs/revealjs/dist/reveal.js"></script>
 
   <!-- reveal.js plugins -->
-  <script src="Workflow_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/quarto-support/support.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Workflow_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Pitch_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
 

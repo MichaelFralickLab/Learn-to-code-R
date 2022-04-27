@@ -1,0 +1,32 @@
+/*-- scss:defaults --*/
+
+  // fonts
+$font-family-sans-serif: "Roboto";
+
+// colors
+$body-bg: #efefef !default;
+  $body-color: #000 !default;
+  $link-color: #51483d !default;
+  $selection-bg: #26351c !default;
+
+  // headings
+$presentation-heading-font: "Lobster";
+$presentation-heading-font-weight: normal;
+$presentation-heading-color: #383d3d !default;
+
+  /*-- scss:rules --*/
+
+  .reveal a {
+    line-height: 1.3em;
+  }
+
+  text, h3, h4 {
+    font-family: 'Roboto';
+  }
+
+body {
+  font-size: 20px;
+}
+code {
+  font-size: 28px;
+}

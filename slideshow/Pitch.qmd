@@ -1,5 +1,5 @@
 ---
-title: "Dear Excel,<hr><h3>R for Data Analysis</h3><h3>💔</h3>"
+title: "Learn to code:<h2>R for Data Analysis</h2><hr>️"
 author: "Jason Moggridge"
 date: "`r Sys.Date()`"
 format: 
@@ -10,84 +10,95 @@ format:
 editor: source
 ---
 
-# It's not Excel, it's me...
-
-## Hi, I'm Jason Moggridge
+## Nice to meet you!
 
 <hr>
 
 ```{r echo=TRUE, eval=FALSE, include=TRUE}
-JasonMoggridge <- data_analyst(
-  institute = "LTRI, Mt. Sinai Hospital",
-  pi        = "Dr. Michael Fralick",
-  masters   = "Bioinformatics, UofGuelph",
-  bachelors = "Biochemistry, Carleton",
-  interests = "Biology | coding | data science",
-  cats      = 2,
-  languages = list('python', 'R', 'sh', '...'),
-  needs_fulfilled_by_excel = FALSE,
-)
+#| code-line-numbers: 'false'
+# about me
+JasonMoggridge <- 
+  data_analyst(
+    institute = "LTRI, Mt. Sinai Hospital",
+    PI        = "Dr. Michael Fralick",
+    masters   = "Bioinformatics, UofGuelph",
+    bachelors = "Biochemistry, Carleton",
+    interests = "Bio | Coding | Data sci",
+    languages = list('python', 'R', 'sh', ...),
+    cats      = 2,
+  )
 ```
 
-## My needs are different now...
+## Coding can be practical skill for everyone
+
+<hr>
+
+::: incremental
+-   Data is everywhere
+-   Coding as a force multiplier
+-   Automate repetitive tasks
+-   Break free from the GUI
+-   Feel the power
+:::
+
+## Research needs are different now...
 
 <hr>
 
 ::: incremental
 -   Bigger data
 
--   More powerful analyses
+-   Powerful methods
 
 -   Interactive visualizations
 
 -   Better reproducibilty and automation
 
--   Coding is the best way to do this
+-   Coding is the best way to do all of this
 :::
 
-## Coding as a practical skill for everyone
+## Create a foundation for future learning
 
 <hr>
 
--   data is everywhere
--   use code as a force multiplier
--   automate trivial tasks
+Coding skills will prepare you for:
 
-## Create a foundation for learning
-
-<hr>
-
--   statistics / machine learning
--   data-mining
--   domain-specific analytics
--   web development
--   software engineering
+::: incremental
+-   Stats / machine learning / data-mining
+    -   Clinical trials
+    -   Drug development
+    -   Bioinformatics
+    -   so much more
+-   Developing web apps and software tools
+:::
 
 ## Why R?
 
 <hr>
 
 ::: incremental
--   a high-level, no-boilerplate, interactive language
+-   A high-level, no-boilerplate, interactive language
 
--   open source & free
+-   Open source & free
 
--   statistical features
+-   Statistical features
 
--   great for research
+-   Great for research
 
--   active development community
+-   Active development community
 
--   packages for everything
+-   Packages for everything
 :::
 
 ## Typical analysis workflow
 
 <hr>
 
-We can do it all in R <br>
+![](https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png){alt="workflow" fig-align="center" width="800"}
 
-<img src="https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png" alt="workflow"/>
+. . .
+
+We can do it all in R! <br>
 
 ## Tidyverse
 
@@ -114,7 +125,7 @@ htmltools::img(
 :::
 :::
 
-## Documentation
+## Great documentation
 
 <hr>
 
@@ -132,26 +143,31 @@ htmltools::img(
 
 <hr>
 
+::: incremental
+-   Hands on coding & problem solving
 -   Explore, model, and simulate data
--   Create summary tables
-    -   'Table 1'
--   Scientific figures
+-   Create summary tables & scientific figures
+:::
 
 ## Create reproducible workflows
 
 <hr>
 
--   Best practices
--   String interpolation
--   Version control
+::: incremental
+-   *Good-enough* practices for data analysis
+-   Version control with git
+-   Team up on projects through Github
+:::
 
-## Communicate and Publish
+## Communicate results
 
 <hr>
 
+::: incremental
 -   `Rmarkdown` for presenting prose, figures, and code
+-   Text generation
 -   Interactive figures for dashboards
--   Collaborate on projects with Github
+:::
 
 # Join Us!
 

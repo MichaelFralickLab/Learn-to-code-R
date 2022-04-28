@@ -19,8 +19,6 @@ editor: source
 # about me
 JasonMoggridge <- 
   data_analyst(
-    institute = "LTRI, Mt. Sinai Hospital",
-    PI        = "Dr. Michael Fralick",
     masters   = "Bioinformatics, UofGuelph",
     bachelors = "Biochemistry, Carleton",
     interests = "Bio | Coding | Data sci",
@@ -35,7 +33,7 @@ JasonMoggridge <-
 
 ::: incremental
 -   Data is everywhere
--   Coding as a force multiplier
+-   Coding is a force multiplier
 -   Automate repetitive tasks
 -   Break free from the GUI
 -   Feel the power
@@ -50,7 +48,7 @@ JasonMoggridge <-
 
 -   Powerful methods
 
--   Interactive visualizations
+-   Interactive reports and visualizations
 
 -   Better reproducibilty and automation
 
@@ -83,7 +81,7 @@ Coding skills will prepare you for:
 
 -   Statistical features
 
--   Great for research
+-   Popular among researchers
 
 -   Active development community
 
@@ -172,3 +170,5 @@ htmltools::img(
 # Join Us!
 
 ![](images/friends.png)
+
+# Questions?

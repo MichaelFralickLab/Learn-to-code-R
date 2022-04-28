@@ -7,7 +7,7 @@ $font-size: '28px';
 // colors
 $body-bg: #efefef !default;
   $body-color: #000 !default;
-  $link-color: #51483d !default;
+  $link-color: #08871b !default;
   $selection-bg: #26351c !default;
 
   // headings
@@ -38,10 +38,6 @@ $presentation-heading-color: #1d0087 !default;
 	word-wrap: break-word;
 }
 
-
-.reveal a {
-  line-height: 1.3em;
-}
 
 .reveal code {
   font-size: 32px;

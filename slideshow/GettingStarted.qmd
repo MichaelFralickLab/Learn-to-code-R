@@ -1,0 +1,95 @@
+---
+title: "Getting started<h3>R for data analysis</h3><hr>"
+author: "Jason Moggridge"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    theme: [default, 'custom.scss']
+    incremental: false 
+    echo: true
+editor: source
+---
+
+# Poll: what would you like to try?
+
+# Setup instructions
+
+## Install R
+
+<hr>
+
+-   Go to the UofT mirror: <https://cran.utstat.utoronto.ca/>
+
+-   Download the appropriate version for your operating system
+
+-   After downloading, open the installer and follow the prompts
+
+## Install Rstudio Desktop
+
+<hr>
+
+-   Go here: <https://www.rstudio.com/products/rstudio/download/>
+
+-   Click the Download button underneath **Rstudio Desktop / Free**
+
+-   On the next page, click 'Download RStudio for ...' (operating system you are using)
+
+-   After downloading, open the installer and follow the prompts
+
+## Optional: install git
+
+<hr>
+
+**Mac Users:**
+
+-   open the Terminal application
+
+-   type `git –version` to check if git is already installed
+
+    -   If git is installed, you will see the version
+
+    -   elseif git is not installed, a prompt will appear.
+
+    -   If no prompt, try: `brew install git`
+
+    -   If you don't have homebrew:
+
+        -   Try `brew –version` to check
+
+        -   Go to [brew.sh](https://brew.sh)
+
+        -   Install homebrew, then do `brew install git`
+
+## Optional: install git
+
+<hr>
+
+**Windows Users:**
+
+-   **Go to:** <https://git-scm.com/download/win>
+
+-   Download of latest version should start automatically, else click 'download latest...'
+
+## Optional: get a Github user account
+
+<hr>
+
+Simply go to Github.com, find the sign-up button, and follow the prompts
+
+<https://github.com/signup?>
+
+## Troubleshooting
+
+<hr>
+
+**Email me at ja.moggridge\@gmail.com**
+
+-   Let me know where things are going wrong
+
+-   Give as much information as possible
+
+-   Screenshots are helpful
+
+-   Details about your system: OS, version, etc.
+
+#### Help me help you!

@@ -1,0 +1,182 @@
+---
+title: "Learn to code:<h2>R for Data Analysis</h2><hr>️"
+author: "Jason Moggridge"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    theme: [default, 'custom.scss']
+    incremental: false 
+    echo: true
+editor: source
+---
+
+## Nice to meet you!
+
+<hr>
+
+```{r echo=TRUE, eval=FALSE, include=TRUE}
+#| code-line-numbers: 'false'
+# about me
+JasonMoggridge <- 
+  data_analyst(
+    masters   = "Bioinformatics, UofGuelph",
+    bachelors = "Biochemistry, Carleton",
+    interests = "Bio | Coding | Data sci",
+    languages = list('python', 'R', 'sh', ...),
+    cats      = 2,
+  )
+```
+
+## Coding can be practical skill for everyone
+
+<hr>
+
+::: incremental
+-   Data is everywhere
+-   Coding is a force multiplier
+-   Automate repetitive tasks
+-   Break free from the GUI
+-   Feel the power
+:::
+
+## Research needs are different now...
+
+<hr>
+
+::: incremental
+-   Bigger data
+
+-   Powerful methods
+
+-   Interactive reports and visualizations
+
+-   Better reproducibilty and automation
+
+-   Coding is the best way to do all of this
+:::
+
+## Create a foundation for future learning
+
+<hr>
+
+Coding skills will prepare you for:
+
+::: incremental
+-   Stats / machine learning / data-mining
+    -   Clinical trials
+    -   Drug development
+    -   Bioinformatics
+    -   so much more
+-   Developing web apps and software tools
+:::
+
+## Why R?
+
+<hr>
+
+::: incremental
+-   A high-level, no-boilerplate, interactive language
+
+-   Open source & free
+
+-   Statistical features
+
+-   Popular among researchers
+
+-   Active development community
+
+-   Packages for everything
+:::
+
+## Typical analysis workflow
+
+<hr>
+
+![](https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png){alt="workflow" fig-align="center" width="800"}
+
+. . .
+
+We can do it all in R! <br>
+
+## Tidyverse
+
+<hr>
+
+A collection of R packages with a shared design philosophy.
+
+::: {#tidyverse .columns}
+::: {.column width="30%"}
+:::
+
+::: {.column width="60%"}
+```{r fig.align='center', fig.width=4, echo=FALSE}
+library(tidyverse)
+htmltools::img(
+  src = "https://tidyverse.tidyverse.org/logo.png",
+  alt = "Tidyverse",
+  width = "50%", align = 'center',
+  fit = 'cover', 
+  .noWS = c('before', 'after')
+)
+
+```
+:::
+:::
+
+## Great documentation
+
+<hr>
+
+::: center
+```{r echo=FALSE}
+htmltools::img(
+  src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-transformation.png", 
+  style = 'float: right;padding-right:150px; width: 800px;')
+```
+:::
+
+# What we'll do:
+
+## Perform data analyses
+
+<hr>
+
+::: incremental
+-   Hands on coding & problem solving
+-   Explore, model, and simulate data
+-   Create summary tables & scientific figures
+:::
+
+## Create reproducible workflows
+
+<hr>
+
+::: incremental
+-   *Good-enough* practices for data analysis
+-   Version control with git
+-   Team up on projects through Github
+:::
+
+## Communicate results
+
+<hr>
+
+::: incremental
+-   `Rmarkdown` for presenting prose, figures, and code
+-   Text generation
+-   Interactive figures for dashboard
+:::
+
+# Join Us!
+
+![](images/friends.png)
+
+# Questions?
+
+# Learner Survey
+
+Please fill out the form at:
+
+<https://forms.gle/ZDMw4sTKUwQ6HQer6>
+
+# 

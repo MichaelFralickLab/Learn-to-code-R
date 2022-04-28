@@ -1,5 +1,44 @@
 # Super-brief guide to research data analysis
   
+### Schedule
+
+#### May TBD: Session 0
+
+Getting setup in R
+
+
+#### June 2: R 101
+
+- Orientation in Rstudio
+- R syntax
+- primitives and sets of data
+- math and logic, operators
+- functions with `readr`
+
+
+#### June 9: Data analysis II
+
+- Data analysis scripting
+- Manipulating datasets with `dplyr` and `tidyr`
+- Plotting with `ggplot2` and extensions
+- Summary statistics / linear models
+
+#### June 16: Data analysis II
+
+- Data analysis scripting
+- Handling text, dates, factors; 
+- Regular expressions and string interpolation
+- Nesting data and functional programming. 
+
+#### June 23
+
+- Reporting with Rmarkdown
+- Interactive figures with ggiraph
+- Version control with git and Github
+
+
+------
+  
 An introduction to working with research data
 
 ## Get R and R studio
@@ -8,41 +47,26 @@ Google 'download R' and 'download Rstudio', find the right versions for your OS.
 
 ## Get a Github account.
 
-Takes seconds. Look into the `usethis` package to setup Github in Rstudio
+Look into the `usethis` package to setup Github in Rstudio
 
-## Read This
 
-Read these two papers and make a short list of their proposed rules.
+# Resources
+
+## R for data science
+
+here - 
+
+## tidyverse documentation / cheatsheets
+
+here - 
+
+## Data handling practices
 
 - [Data Organization in Spreadsheets](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989)  
 - [Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
-## Data Commandments
 
-- Always make your data machine-readable
-- Always save data in plain-text, non-proprietary formats.
-- Make a column for each specific type of information
-- Make a row for each observation
-- Columns must have a specific type: number, date, category, or text
-  - Don't write text in number columns! A long text explaining why a value is missing is of little value in analysis. Use a 'comments' column for 
-- Numerical and categorical are the easiest data to use; 
-  - Categories need to have labels that match (spelling and case).
-  - Numbers 
-- Free text data is nearly impossible to use; extract values of interest into separate columns where possible.
-- You can use excel but save the data as comma-separated values
-- Always write dates as YYYY-MM-DD (every other way is wrong)  
-- Use 'NA' to indicate missing values.
-- Don't use random symbols to indicate things.
-- Don't use non-standard characters at all; eg. things like ˚ µ ˜ ß ∂ ƒ  ∑ ® † 
-- Spaces suck: use snake_case for naming things: files, objects, variables, etc.
-
-## How to talk about data
-
-- Files have names. Always include the file path and name when referring to files.
-- Websites have URLS. Always include the url when referring to websites.
-- Use quotes or fonts to differentiate code and data names from regular english.
-
-## How to solve coding errors and other issues
+## How to solve coding errors and other technical issues
 
 - Restart and try again
 - Check your code for obvious issues - typos, symbols in the wrong place, etc.
@@ -55,16 +79,6 @@ Read these two papers and make a short list of their proposed rules.
 - Include as much information as possible!
 - Discuss what you've tried already and what the output was.
 
-## Your R toolbox
-
-- Rstudio as your IDE. 
-- `tidyverse` for data munging.    
-- `ggplot2` for basic plotting.
-- `patchwork` to combine basic plots.
-- `ggiraph` to make your ggplots interactive
-- `rmarkdown` to create static report files in html
-- `shiny` to create interactive apps 
-- `tidymodels` for machine learning
 
 
 

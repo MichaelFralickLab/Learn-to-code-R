@@ -164,7 +164,7 @@ htmltools::img(
 ::: incremental
 -   `Rmarkdown` for presenting prose, figures, and code
 -   Text generation
--   Interactive figures for dashboards
+-   Interactive figures for dashboard
 :::
 
 # Join Us!

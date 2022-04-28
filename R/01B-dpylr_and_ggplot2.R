@@ -36,22 +36,23 @@ library(tidyverse)
 
 ## data --------------------------------------------------------------
 
-# we can also access package contents with the :: operator
-# this is our example dataset from the palmerpenguins package
-palmerpenguins::penguins
-?palmerpenguins::penguins
-
-# it is a tibble: a df with better properties
-class(palmerpenguins::penguins)
-
-# assign so we don't need to load the package
-penguins <- palmerpenguins::penguins
-
-##' Files I/O ---------------------------------------------------------
-
-#' `readr::write_*` family of functions
-readr::write_csv(x = penguins, 'data/penguins.csv')
-rm(penguins)
+#' # we can also access package contents with the :: operator
+#' # this is our example dataset from the palmerpenguins package
+#' palmerpenguins::penguins
+#' ?palmerpenguins::penguins
+#'
+#' # it is a tibble: a df with better properties
+#' class(palmerpenguins::penguins)
+#'
+#' # assign so we don't need to load the package
+#' penguins <- palmerpenguins::penguins
+#'
+#' ##' Files I/O ---------------------------------------------------------
+#'
+#' #' `readr::write_*` family of functions
+write_csv(x = penguins, 'data/penguins.csv')
+#' rm(penguins)
+#' # penguins --> Error: object 'penguins' not found
 
 #' `readr::read_*` family of functions
 penguins <- read_csv('data/penguins.csv', skip = 0, trim_ws = T)
@@ -70,9 +71,10 @@ glimpse(penguins)
 # skimr is a good one
 skimr::skim(penguins)
 
-##' the pipe: `|>` or `%>%` !
-# passes LHS to first argument of RHS,
-penguins |> View()
+##' the pipe: `|>` or `%>%`  passes LHS to first argument of RHS,
+
+# the view function opens the viewer with the dataframe
+penguins |> view()
 
 
 ## `dplyr` ~ Table operations ----------------------------------------
@@ -104,6 +106,9 @@ penguins |> select(species, sex, year)
 
 penguins |> filter(sex == 'male')
 penguins |> filter(sex == 'male', bill_length_mm > 39.5)
+
+# operators: ==, !=, >, <, <=, >=, &, |
+# & is usually unnecessary, just separate arguments with a commma
 
 # we can use is.*() functions to test whether a vector/value is a certain class
 penguins |> filter(is.na(bill_length_mm))

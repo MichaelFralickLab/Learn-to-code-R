@@ -92,7 +92,7 @@ Coding skills will prepare you for:
 
 <hr>
 
-![](https://d33wubrfki0l68.cloudfront.net/795c039ba2520455d833b4034befc8cf360a70ba/558a5/diagrams/data-science-explore.png){alt="workflow" fig-align="center" width="800"}
+![](images/download.png){alt="workflow" fig-align="center"}
 
 . . .
 

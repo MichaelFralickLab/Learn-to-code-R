@@ -8,17 +8,19 @@
 #' code syntax is highlighted to help you read it
 
 
+## HELLO WORLD
+
 # '<-' is the assigment operator
-my_variable <- 'hello world'
+my_value <- 'hello world'
 
 # print returns the value in the console
-print(my_variable)
+print(my_value)
 
 # so does just calling the value
-my_variable
+my_value
 
 
-## Primitives (5min) ------------------------------------------------------------
+## PRIMITIVES (5min) ------------------------------------------------------------
 
 # lets talk about 'primitives', the building blocks of data...
 
@@ -34,11 +36,9 @@ pi
 # character / string
 "i am character data in quotes"
 
-# special cases - more complex
-factor('now im a factor')
-as.Date('1999-12-31')
-
-
+# # special cases - more complex
+# factor('now im a factor')
+# as.Date('1999-12-31')
 
 ## Containers with multiple values -----------------------------------------
 
@@ -61,8 +61,7 @@ data.frame(x = c(1,2,3), y = c('a','b','c'))
 # these are 'nothing's for different contexts
 x <- NULL      # empty list in place of a list.
 y <- NA        # single missing value in place of a value.
-z <- NaN       # not-a-number in place of a numeric value.
-
+z <- NaN       # not-a-number in place of a numeric value. try sqrt(-1).
 
 # booleans (2min) --------------------------------------------------------------
 
@@ -70,7 +69,7 @@ z <- NaN       # not-a-number in place of a numeric value.
 TRUE
 FALSE
 
-# equality tests
+# comparison operators
 1 == 1
 1 > 2
 1 < 2
@@ -80,38 +79,38 @@ FALSE
 # membership test
 1 %in% c(1,2,3)
 
-# boolean operators ! & |
-# 'not': !x does negation of x
+# close enough test (if looking for equality)
+near(1.0000001, 1)
+near(1.00000001, 1)
+
+
+# NOT: !x does negation of x
 !T
 !F
 1 != 2
 
-# AND: x & y
+# AND: both x & y
 T & F
+T & T
 
-# OR: x | y
+# OR: either x | y
 T | F
 
+# brakets to nest expressions
+T & (F | T)
+
 # any(...), all(...) take multiple values and result a single result
-any(T, F)
-all(T, F)
+any(c(T, F))
+all(c(T, F))
 
 
-# using tests to control flow ----------
 
 # imagine a website where the user tries to guess a number between 1 and 10...
-user_guess <- 2
-answer <- 9
-user_wins <- user_guess == answer
 
 # we would use `if (test) ` as  conditional statement here to control the flow of the program to either
-if (user_wins) {
-  'Winner!'
-} else {
-  'Try again'
-}
 
-# cleaner way that is 'vectorised'
+
+# y that is 'vectorised'
 user_guess <- c(1, 2, 4, 9)
 answer <- c(10, 7, 8, 9)
 results <- ifelse(test = user_guess == answer, yes = 'Winner!', no =  "Try again")
@@ -263,3 +262,40 @@ str(df)
 tibble::tibble(df)
 
 rm(list = ls())
+
+
+
+
+
+
+# using tests to control flow ----------
+
+play_game <- function(){
+  forever <- TRUE
+  cat('Welcome to the game!\n')
+  cat('Press ctrl+c to quit\n')
+
+  while (forever) {
+    answer <- sample(1:10, 1)
+    user_guess <- readline(prompt = 'Guess a number between 0 and 9:   ')
+    user_wins <- user_guess == answer
+
+    if (user_wins) {
+      cat('Winner!')
+    } else {
+      cat(str_glue('Answer was {answer}. Try again'))
+    }
+
+    play_again <- readline('Play again? (y/n):')
+    if (play_again == 'y') {
+      cat("Let's go!")
+    } else {
+      cat("Thanks for playing")
+      break
+    }
+    # cleaner wa
+  }
+  return()
+}
+
+play_game()

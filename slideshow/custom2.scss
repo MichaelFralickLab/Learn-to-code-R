@@ -1,0 +1,71 @@
+/*-- scss:defaults --*/
+
+  // fonts
+$font-family-sans-serif: "Roboto";
+$font-size: '28px';
+
+// colors
+$body-bg: #fff !default;
+  $body-color: #000 !default;
+  $link-color: #08871b !default;
+  $selection-bg: #26351c !default;
+
+  // headings
+$presentation-heading-font: "Lobster";
+$presentation-heading-font-weight: normal;
+$presentation-heading-color: #35518f !default;
+
+
+  /*-- scss:rules --*/
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+	margin: var(--r-heading-margin);
+	color: var(--r-heading-color);
+
+	font-family: var(--r-heading-font);
+	font-weight: var(--r-heading-font-weight);
+	line-height: var(--r-heading-line-height);
+	letter-spacing: var(--r-heading-letter-spacing);
+
+	text-transform: var(--r-heading-text-transform);
+	text-shadow: var(--r-heading-text-shadow);
+
+	word-wrap: break-word;
+}
+
+
+.reveal code {
+  font-size: 20px;
+  font-family: 'Source Code Pro';
+}
+
+.reveal p {
+  font-size: 28px;
+  color: #09031f;
+  font-family: 'Source Code Pro';
+}
+
+.reveal ul {
+  font-size: 28px;
+  font-family: 'Source Code Pro';
+	list-style-type: disc;
+}
+
+.reveal ul ul {
+  color: #3c278a;
+	list-style-type: circle;
+}
+
+.reveal ul ul ul {
+	list-style-type: square;
+}
+
+strong {
+  color: #a61f5a;
+}
+

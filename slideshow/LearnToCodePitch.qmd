@@ -5,10 +5,15 @@ date: "`r Sys.Date()`"
 format: 
   revealjs:
     theme: [default, 'custom.scss']
+    transition: slide
+    background-transition: fade
     incremental: false 
     echo: true
 editor: source
 ---
+
+<!-- # -->
+<!-- ![](images/cardiolipin_dude.png) -->
 
 ## Nice to meet you!
 
@@ -17,15 +22,17 @@ editor: source
 ```{r echo=TRUE, eval=FALSE, include=TRUE}
 #| code-line-numbers: 'false'
 # about me
-JasonMoggridge <- 
-  data_analyst(
-    masters   = "Bioinformatics, UofGuelph",
-    bachelors = "Biochemistry, Carleton",
-    interests = "Bio | Coding | Data sci",
-    languages = list('python', 'R', 'sh', ...),
-    cats      = 2,
-  )
+JasonMoggridge <-
+data_analyst(
+masters = "Bioinformatics, UofGuelph",
+bachelors = "Biochemistry, Carleton",
+interests = "Bio | Coding | Data sci",
+languages = list('python', 'R', 'sh', ...),
+cats = 2,
+)
+
 ```
+
 
 ## Coding can be practical skill for everyone
 
@@ -135,37 +142,95 @@ htmltools::img(
 ```
 :::
 
-# What we'll do:
+# What we'll do (syllabus)
 
-## Perform data analyses
 
-<hr>
-
-::: incremental
--   Hands on coding & problem solving
--   Explore, model, and simulate data
--   Create summary tables & scientific figures
-:::
-
-## Create reproducible workflows
+## 1: The basics / Work with data
 
 <hr>
 
-::: incremental
--   *Good-enough* practices for data analysis
--   Version control with git
--   Team up on projects through Github
+Get started in R, learn the syntax and data types. Build objects and run functions.
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+::: {align="'center'"}
+![](https://rstudio.cloud/images/primers/thumb1.svg)
+:::
 :::
 
-## Communicate results
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb-data.svg)
+:::
+:::
+
+## 2: Data analysis: Visualize and tidy data
 
 <hr>
 
-::: incremental
--   `Rmarkdown` for presenting prose, figures, and code
--   Text generation
--   Interactive figures for dashboard
+Explore your data visually and transform it to meet your needs. BYO dataset if you have one!
+
+::: columns
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb2.svg)
 :::
+
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb8.svg)
+:::
+:::
+
+## 3: Iterate / Write Functions
+
+Iteration (doing repetitive tasks) is a core programming concept. Functions are the key to R programming, applying them in a reuseable way will simplify your code.
+
+::: columns
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb3.svg)
+:::
+
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb4.svg)
+:::
+:::
+
+## 4: Reporting and Communication
+
+Share your work and findings with the world effectively.
+
+Rmarkdown is a versatile package for creating reports, slides, books, blogs, emails, apps, ...
+
+::: columns
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb7.svg)
+:::
+
+::: {.column width="50%"}
+![](https://rstudio.cloud/images/primers/thumb-iterate.svg)
+:::
+:::
+
+
+<!-- ## Perform data analyses -->
+
+<!-- <hr> -->
+
+<!-- ::: incremental -->
+<!-- -   Hands on coding & problem solving -->
+<!-- -   Explore, model, and simulate data -->
+<!-- -   Create summary tables & scientific figures -->
+<!-- ::: -->
+
+<!-- ## Communicate results -->
+
+<!-- <hr> -->
+
+<!-- ::: incremental -->
+<!-- -   `Rmarkdown` for presenting prose, figures, and code -->
+<!-- -   Text generation -->
+<!-- -   Interactive figures for dashboard -->
+<!-- ::: -->
 
 # Join Us!
 
@@ -179,4 +244,4 @@ Please fill out the form at:
 
 <https://forms.gle/ZDMw4sTKUwQ6HQer6>
 
-# 
+# Syllabus

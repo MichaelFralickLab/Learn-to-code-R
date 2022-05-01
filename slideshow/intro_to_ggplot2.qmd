@@ -1,0 +1,433 @@
+---
+title: "Learn to code:<h2>effective and accessible visualizations with ggplot2</h2><hr>️"
+author: "Jason Moggridge"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    theme: [default, 'custom2.scss']
+    transition: fade
+    background-transition: fade
+    incremental: true
+    echo: true
+editor: source
+---
+
+## What is ggplot2?
+
+<hr>
+
+-   tidyverse graphics package
+
+-   'grammar of graphics' syntax
+
+-   sensible defaults
+
+-   mostly customizable
+
+-   extensible framework
+
+```{r setup, echo=FALSE}
+library(ggplot2)
+theme_set(
+  theme_bw() + 
+  theme(
+    text = element_text(size = 20), 
+    strip.background = element_blank(),
+    legend.position = 'top',
+    plot.background = element_blank()
+  ))
+```
+
+## The grammar of graphics
+
+<hr>
+
+-   data variables are mapped to aesthetics (`aes`)
+
+-   plots are built in layers
+
+## 'Aesthetic mapping' concept
+
+<hr>
+
+-   **Aesthetics** are visual channels to convey information.
+
+-   How we link **variables** to aesthetics defines how data are displayed.
+
+-   Different **layers** can have different aesthetic **mappings**
+
+## Aesthetics
+
+<hr>
+
+-   x, y - position on coordinate plane
+-   size
+-   color, fill, alpha
+    -   \*accessibility, limited bandwidth
+-   shape or line-type
+    -   \*discrete, limited bandwidth
+
+## geom\_\*()
+
+<hr>
+
+These layers add shapes that display the data.
+
+-   points -\> `geom_point`
+
+-   lines -\> `geom_line`
+
+-   bars -\> `geom_bar` or `geom_col`
+
+-   boxplots, errorbars, pointranges, beeswarms, tiles, density, ...
+
+## Example: 'iris'
+
+<br>
+
+Built-in data is great for learning / showing examples
+
+```{r echo = T}
+iris |> str()
+```
+
+## Basic ggplot2 usage - a histogram
+
+<hr>
+
+::: columns
+::: {.column width="40%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|2|3|4-6|9"
+ggplot(
+  data = iris,
+  aes(x = Petal.Length)
+  ) +
+  geom_histogram()
+```
+:::
+
+::: {.column width="55%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+ggplot(
+  data = iris,
+  aes(x = Petal.Length)
+  ) +
+  geom_histogram()
+```
+:::
+:::
+
+## Basic ggplot2 usage - stacked histogram
+
+<hr>
+
+::: columns
+::: {.column width="40%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|4|6-9"
+ggplot(
+  data = iris,
+  aes(x = Petal.Length,
+      fill = Species)
+  ) +
+  geom_histogram(
+    color = 'white',
+    position = 'stack'
+    )
+```
+:::
+
+::: {.column width="55%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+ggplot(
+  data = iris,
+  aes(x = Petal.Length,
+      fill = Species)
+  ) +
+  geom_histogram(
+    color = 'white',
+    position = 'stack'
+    )
+```
+:::
+:::
+
+## Petal dimensions scatter
+
+<hr>
+
+::: columns
+::: {.column width="35%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|2|3|4-6|9"
+p <- ggplot(
+  data = iris,
+  aes(
+    x = Petal.Length, 
+    y = Petal.Width, 
+    color = Species
+    )
+  ) +
+  geom_point()
+p
+```
+:::
+
+::: {.column width="65%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+p <- ggplot(
+  data = iris,
+  aes(
+    x = Petal.Length, 
+    y = Petal.Width, 
+    color = Species
+    )
+  ) +
+  geom_point()
+p
+```
+:::
+:::
+
+## Add more layers with '+'
+
+<hr>
+
+New layers inherit **aes** set in ggplot() but these can be added or over-ridden.
+
+::: columns
+::: {.column width="40%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "1|2-6"
+p +
+  geom_smooth(
+    aes(fill = Species),
+    alpha = 0.15,
+    method = 'lm'
+  )
+```
+:::
+
+::: {.column width="55%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+p +
+  geom_smooth(
+    aes(fill = Species),
+    alpha = 0.15,
+    method = 'lm'
+  )
+```
+:::
+:::
+
+## facet\_\*()
+
+Split plots into multiple panels based on variable levels
+
+::: columns
+::: {.column width="35%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+p + facet_grid(~Species)
+```
+:::
+
+::: {.column width="65%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+p + facet_grid(~Species)
+```
+:::
+:::
+
+## scale\_\*()
+
+Alter the properties of the aesthetic space with scale\_\*() functions
+
+::: columns
+::: {.column width="45%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|11|8,9"
+p <- p + 
+  scale_color_viridis_d(end = 0.9)
+p
+```
+:::
+
+::: {.column width="50%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+p <- p + scale_color_viridis_d(end = 0.9)
+p
+```
+:::
+:::
+
+## labs()
+
+Add titles and labels
+
+::: columns
+::: {.column width="45%"}
+<br>
+
+```{r}
+#| echo: true
+#| eval: false
+p <- p + 
+  labs(
+    x = 'Length',
+    y = 'Width',
+    title = 'Iris petal dimensions'
+  )
+p
+```
+:::
+
+::: {.column width="50%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+p <- p + 
+  labs(
+    x = 'Length',
+    y = 'Width',
+    title = 'Iris petal dimensions'
+  )
+p
+```
+:::
+:::
+
+## theme\*()
+
+-   Select preset themes by adding `+ theme_*()`
+
+-   Or override any parameter with `+ theme(...)`
+
+-   Make theme\_\<your_name\>() by creating a function that returns a `theme()` list
+
+## theme()
+
+```{r}
+p + theme(
+  plot.title = element_text(family = 'Tourney', color = 'midnight blue'),
+  axis.text = element_text(family = 'IBM Plex Sans', size = 11),
+  plot.title.position = 'plot',
+  legend.position = 'right'
+)
+```
+
+## Extensions
+
+::: columns
+::: {.column width="45%"}
+-   Easily combine multiple ggplot2s into complex layouts with `patchwork`
+
+-   Make plots interactive using `ggiraph` on ggplot2
+:::
+
+::: {.column width="50%" style="padding-left: 0.5em;"}
+```{r fig.height=6}
+#| echo: false
+plt <- iris |> 
+  dplyr::mutate(tooltip = stringr::str_glue(
+    "Iris {Species}
+    Petal length: {Petal.Length}
+    Petal width: {Petal.Width}
+    "
+  )) |> 
+  ggplot(
+    aes(
+      Petal.Length, 
+      Petal.Width, 
+      color = Species,
+      tooltip = tooltip
+      )) +
+  ggiraph::geom_point_interactive(
+    alpha = 0.65,
+    size = 2
+    ) +
+  scale_color_viridis_d(end = 0.9)
+
+ggiraph::ggiraph(ggobj = plt, tooltip_extra_css = "font-family: Lobster; background-color: white;")
+
+```
+:::
+:::
+
+## ggplot2 art
+
+```{r fig.height=6, fig.width=6, fig.align='center'}
+#| echo: false
+library(tidyverse)
+p <- seq(-3, 3, by = .01) %>%
+  expand_grid(x = ., y = .) |> 
+  ggplot(aes(
+    x = 1 - x - sin(y ^ 2),
+    y = 1 - y - cos(x ^ 2),
+    color = sin(x ^ 2)
+  )) +
+  geom_point(
+    alpha = .45,
+    shape = 15,
+    size = 0,
+    show.legend = F
+  ) +
+  scale_color_viridis_c(option = 'B') +
+  coord_polar() +
+  theme_void() 
+p
+```
+
+## Code
+
+```{r}
+#| eval: false
+library(tidyverse)
+p <- seq(-3, 3, by = .01) %>%
+  expand_grid(x = ., y = .) |> 
+  ggplot(aes(
+    x = 1 - x - sin(y ^ 2),
+    y = 1 - y - cos(x ^ 2),
+    color = sin(x ^ 2)
+  )) +
+  geom_point(
+    alpha = .2,
+    shape = 15,
+    size = 0,
+    show.legend = F
+  ) +
+  scale_color_viridis_c(option = 'B') +
+  coord_polar() +
+  theme_void() 
+```
+
+# Let's try it out

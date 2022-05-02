@@ -1,5 +1,5 @@
 ---
-title: "Learn to code:<h2>effective and accessible visualizations with ggplot2</h2><hr>️"
+title: "Learn to code:<h4 class='title_h4'>Creating effective and accessible visualizations with `ggplot2`</h4><hr>️"
 author: "Jason Moggridge"
 date: "`r Sys.Date()`"
 format: 
@@ -16,13 +16,13 @@ editor: source
 
 <hr>
 
--   tidyverse graphics package
+-   Tidyverse graphics package `library(ggplot2)`
 
--   'grammar of graphics' syntax
+-   'Grammar of graphics' syntax
 
--   sensible defaults
+-   Sensible defaults
 
--   mostly customizable
+-   Mostly customizable
 
 -   extensible framework
 
@@ -42,11 +42,19 @@ theme_set(
 
 <hr>
 
--   data variables are mapped to aesthetics (`aes`)
+-   Every plot consists of the same components:
 
--   plots are built in layers
+    -   Data
 
-## 'Aesthetic mapping' concept
+    -   Coordinate system
+
+    -   Symbols that represent data
+
+-   Variables are linked to aesthetics (**`aes`**) of the symbols to show data
+
+-   Plots are built in layers
+
+## Concept: *Aesthetic mapping* 
 
 <hr>
 

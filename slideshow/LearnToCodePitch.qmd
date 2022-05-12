@@ -25,11 +25,10 @@ Jason_Moggridge <-
   data_analyst(
     masters   = "Bioinformatics, UofGuelph",
     bachelors = "Biochemistry, Carleton",
-    interests = "Bio | Coding | Data sci",
+    interests = "bio | coding | data sci",
     languages = list('python', 'R', 'sh', ...),
     cats      = 2,
   )
-
 ```
 
 ## Coding can be practical skill for everyone

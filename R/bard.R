@@ -7,8 +7,9 @@ bard <- bardr::all_works_df |>
   as_tibble() |>
   transmute(name, genre,
             content = content |>
-              str_replace_all('\\u001a', "'") |>
-              str_remove_all([:digits:]{})) |>
+              str_replace_all('\\u001a', "'")
+              # str_remove_all([:digits:]{})
+            ) |>
   group_by(name, genre) |>
   nest(data = content) |>
   ungroup()

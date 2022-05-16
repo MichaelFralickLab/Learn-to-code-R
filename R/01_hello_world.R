@@ -43,39 +43,52 @@ log(exp(1), 2)
 paste('Hello ', 'World!')
 
 
-### Fizz buzz ---
 
 ## primitve data types
 num <- 1.23456789   # double
 char <- 'character' # string
 boolean <- TRUE        # logical
-date <- Sys.Date()  # data special
-time <- Sys.time()  # time special
+d <- date()  #  special
 cat <- factor('A')  # has levels
 
-time |> as.numeric() |> as.character() |> as.logical()
+# coerce more complex data into more basic types
+time |> as.numeric() |> as.character() |> as.factor()
 
 # vectors (we're standing on them right now....)
 my_value
 rep('Hello world!', times = 100)
 
-
-# data.frames
-df <- data.frame(
+# list_data
+list(
   x = 1:4,
   y = (1:4) ** 2
 )
-tbl <- tibble::tibble(df)
 
-print(df)
-print(tbl)
+# data.frames
+data.frame(
+  x = 1:4,
+  y = (1:4) ** 2
+)
 
-!identical(df, tbl)
-# they're not 'identical', but it's 'all' good
-if (all(df == tbl)) print('saul goodman')
 
-library(tidyverse)
-tibble(x = )
+tibble::tibble(
+  x = 1:4,
+  y = x ** 2
+)
+
+
+#
+# tbl <- tibble::tibble(df)
+#
+# print(df)
+# print(tbl)
+#
+# !identical(df, tbl)
+# # they're not 'identical', but it's 'all' good
+# if (all(df == tbl)) print('saul goodman')
+#
+# library(tidyverse)
+# tibble(x = )
 
 
 

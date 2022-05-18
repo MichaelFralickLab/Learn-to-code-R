@@ -1,0 +1,130 @@
+---
+title: "Learn to code: Set-up<br><hr>"
+output: 
+  html_document:
+    theme: flatly
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+Dear learner,
+
+Thanks for taking the time to install R and Rstudio ahead of the first
+seminar. Installation is super easy and should take \< 10 mins. I
+haven't tried to cover any troubleshooting here (there are too many
+possibilities)... so **if you run into any issues, please email me for
+help!**
+
+If you already have R installed, you *should* update if you are on
+version 3.9 or older. There are so many awesome new features in v4.0 and
+up. BUT, be forewarned: a new install of R will wipe out all your
+existing R libraries and you'll need to install them again (no big deal,
+just takes a while to download them all again). Keeping Rstudio updated
+is always a good idea and won't affect your R environment!
+
+Best wishes,
+
+\- Jason Moggridge
+([ja.moggridge\@gmail.com](mailto:ja.moggridge@gmail.com){.email})
+
+------------------------------------------------------------------------
+
+## Install R
+
+-   Go to: <https://cran.utstat.utoronto.ca/>
+-   See the 'Download R for..' links in the top section?
+-   Click the version for your system (Win, Mac, Linux).
+    -   Win page -\> click 'base' version, download on next page.\
+    -   Mac page -\> find the version for your processor (intel or arm)
+        on the next page, download.
+-   Once the installer package finishes downloading, open it.
+-   Click 'continue' a bunch of times.
+-   Install will complete eventually ✅
+-   You can close and delete the installer package now.
+
+------------------------------------------------------------------------
+
+## Install Rstudio IDE
+
+-   Go to: <https://www.rstudio.com/products/rstudio/download/> and
+    scroll down half a page
+-   Find "RStudio Desktop - open source license - Free" -\> click
+    Download.
+-   Next page will show you the version for your OS, click download.
+-   Once the installer package finishes downloading, open it.
+-   Click 'continue' a bunch of times.
+-   Install should complete eventually ✅.
+-   You can close and delete the installer package now.
+
+----
+
+## Verify installation
+
+You should be able to find and open the Rstudio application now. Do so
+and find the 'Console' window in the app. Type `R.version` in the
+command prompt (after the `>` symbol) and you should see it return the
+details like this (with different info for your computer):
+
+## ![](images/Screen%20Shot%202022-05-17%20at%206.56.29%20PM.png){align="center" width="300"} {style="padding-left: 12rem; padding-right: 6rem;"}
+
+------------------------------------------------------------------------
+
+## Install `tidyverse`
+
+Tidyverse is an awesome collection of packages that we will use
+constantly. Install it in R by typing this command into the console:
+
+```{r eval=FALSE, echo=TRUE}
+install.packages('tidyverse')
+```
+
+------------------------------------------------------------------------
+
+## Congrats, you're ready to go! 🎉
+
+<!-- ```{r echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'} -->
+
+<!-- library(tidyverse, quietly = T) -->
+
+<!-- seq(-3, 3, by = .01) |>  -->
+
+<!--   (function(a) expand_grid(x = a, y = a))() %>% -->
+
+<!--   ggplot(aes( -->
+
+<!--     x = 1 - x - sin(y ^ 2), -->
+
+<!--     y = 1 - y - cos(x ^ 2), -->
+
+<!--     color = sin(x ^ 2) -->
+
+<!--   )) + -->
+
+<!--   geom_point( -->
+
+<!--     alpha = .2, -->
+
+<!--     shape = 15, -->
+
+<!--     size = 0, -->
+
+<!--     show.legend = F -->
+
+<!--   ) + -->
+
+<!--   coord_polar() + -->
+
+<!--   scale_color_viridis_c(option = 'B') + -->
+
+<!--   theme_void()  -->
+
+<!-- ``` -->
+
+------------------------------------------------------------------------
+
+<br> <br>
+
+<br> <br>
+
+<br> <br>

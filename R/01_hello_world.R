@@ -4,10 +4,10 @@
 # we 'assign' the character string 'hello world' to the variable my_value
 
 # use Ctrl + Enter or ⌘ + Enter
-my_value <- 'Hello world!'
+greeting <- 'Hello world!'
 
 # print returns the value in the console
-print(my_value)
+print(x = greeting)
 
 ### --- functions / documentation
 
@@ -17,7 +17,7 @@ class(print)
 
 # arguments are the input to functions, x is an argument
 # we pass our data to functions as arguments
-print(x = my_value)
+print(x = greeting)
 
 # some functions don't need any arguments
 Sys.Date()

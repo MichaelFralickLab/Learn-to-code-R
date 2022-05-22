@@ -57,7 +57,7 @@ Best wishes,
 -   Install should complete eventually ✅.
 -   You can close and delete the installer package now.
 
-----
+------------------------------------------------------------------------
 
 ## Verify installation
 

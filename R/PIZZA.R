@@ -76,12 +76,14 @@ excel_col_to_number(target = 'pizza')
 #   str_c(collapse = '')
 
 #
-number_to_excel_column  <- function(){}
 
 
-# now do a list of terms
-
-tibble(
-  targets = c('pizza', 'cats', 'beer', ''),
-  excel_col = map_dbl(targets, excel_col_to_number))
-
+# number_to_excel_column  <- function(){}
+#
+#
+# # now do a list of terms
+#
+# tibble(
+#   targets = c('pizza', 'cats', 'beer', ''),
+#   excel_col = map_dbl(targets, excel_col_to_number))
+#

@@ -3,7 +3,7 @@
 ##################################################
 #'
 #' It's your first day working as an analyst for NASA.
-#' Your supervisor has emailed you a data with a series of unusual observations
+#' Your supervisor has emailed you a dataset with a series of unusual observations
 #' that they've recorded over the past few weeks. They're not sure how to
 #' interpret this data and are desperate for your help.
 #'
@@ -12,8 +12,9 @@
 #' - There are 25,800 pairs of frequency (x) and amplitude (y) values.
 #' - The data were de-noised to remove background and artefacts.
 #'
-#' Can you find any patterns in the data?
-#'
+#' *Can you find any patterns in the data?*
+#' *Don't worry about coding along, this is just a demo!*
+#' ----------------------------------------------------------------------------
 
 # run this command to get all the packages we'll use:
 # install.packages(c('tidyverse', 'googlesheets4','rmarkdown','leaftlet')
@@ -32,3 +33,13 @@ signals |> summary()
 #' *What should we do to start?*
 #' *Put your suggestions in the chat*
 
+signals |>
+  pivot_longer(everything()) |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_wrap(~name)
+
+signals |>
+  ggplot(aes(amplitude, frequency)) +
+  geom_point() +
+  coord_flip()

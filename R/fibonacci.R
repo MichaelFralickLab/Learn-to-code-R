@@ -15,8 +15,10 @@ fibonacci <- function(n) {
 # fibonacci(n = 0)
 fibonacci(n = 1) # yay
 fibonacci(n = 2) # yay
+fibonacci(n = 10) # yay
 fibonacci(n = 1:10) # huh?
-# our function isn't vectorized!
+# oh no, our function isn't vectorized!
+# it doesn't accept more than a single value because if/else handles each value differently
 
 # could do iteration with a map
 # get first 10..
@@ -31,21 +33,8 @@ tibble(
 ) |>
   ggplot(aes(n, fib)) +
   geom_point() +
-  # scale_y_log10() +
-  # geom_smooth() +
   labs(x = 'sequence', y = 'fibonacci')
 
-
-
-tibble(
-  n = 1:50,
-  fib = map_dbl(n, .f = fibonacci)
-) |>
-  ggplot(aes(n, fib)) +
-  geom_point() +
-  # scale_y_log10() +
-  # geom_smooth() +
-  labs(x = 'sequence', y = 'fibonacci')
 
 # do the fibonacci calc from ground up
 # with memoization (dynamic programming)
@@ -61,15 +50,28 @@ fib_seq <- function(n){
   return(fib_list)
 }
 
-n <- 1000
+n <- 100
+
+lm_txt <- function(n = 100){
+  df <- tibble(
+    f = fib_seq(n),
+    lf = lag(f)
+  )
+  m <- lm(f ~ lf, df)
+
+  r2 <- m$qr$qr
+
+}
 
 tibble(
   x = seq(n),
   f = fib_seq(n),
+  lf = lag(f)
 ) |>
-  ggplot(aes(x, f)) +
-  geom_point(size = 0) +
-  scale_y_continuous(trans = 'log2')
+  ggplot(aes(f, lf)) +
+  geom_smooth() +
+  geom_text(x = 20, y = 10, label = )
+  geom_point(size = 1)
 
 # take the log2 transformed fib seq.
 fib_data <- tibble(x = seq(n), fib = fib_seq(n), fib_log2 = log2(fib))

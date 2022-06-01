@@ -15,21 +15,19 @@
 #' Can you find any patterns in the data?
 #'
 
-# install.packages('tidyverse')
+# run this command to get all the packages we'll use:
+# install.packages(c('tidyverse', 'googlesheets4','rmarkdown','leaftlet')
+
+# load tidyverse package
 library(tidyverse)
 
-
-# signals data from web
+# signals data shared from my github repo
 signals <- read_csv("https://raw.githubusercontent.com/jmoggridge/learn_to_code_seminar/main/data/alien_signals.csv")
-
-# signals data stored locally
-signals <- read_csv("data/alien_signals.csv")
 
 # here's what your boss has tried so far...
 signals
 signals |> glimpse()
 signals |> summary()
-
 
 #' *What should we do to start?*
 #' *Put your suggestions in the chat*

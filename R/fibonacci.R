@@ -37,7 +37,7 @@ tibble(
 
 
 # do the fibonacci calc from ground up
-# with memoization (dynamic programming)
+# with *memoization*
 fib_seq <- function(n){
   fib_fill <- rep(NA, times = as.integer(n - 2))
   fib_list <- c(1, 1, fib_fill) # init
@@ -70,7 +70,7 @@ tibble(
 ) |>
   ggplot(aes(f, lf)) +
   geom_smooth() +
-  geom_text(x = 20, y = 10, label = )
+  # geom_text(x = 20, y = 10)
   geom_point(size = 1)
 
 # take the log2 transformed fib seq.

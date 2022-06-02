@@ -1,11 +1,6 @@
 # Learn to Code: R for research data analysis
   
-### Schedule
-
-#### May TBD: Session 0
-
-Getting setup in R
-
+### Schedule 2022
 
 #### June 2: R 101
 
@@ -27,9 +22,9 @@ Getting setup in R
 #### June 16: Data analysis II
 
 - Data analysis scripting II
-- Handling text, dates, factors; regex.
+- Handling text, dates, factors
 - Regular expressions and string interpolation
-- Nesting data and functional programming. 
+- Nested data and functional programming
 
 #### June 23
 
@@ -44,7 +39,7 @@ An introduction to working with research data
 
 ## Get R and R studio
 
-Google 'download R' and 'download Rstudio', find the right versions for your OS. Download and install R, then Rstudio.
+Find the [install instructions here](https://venerable-longma-68a7c8.netlify.app/) and get R and Rstudio installed on your computer.  
 
 ## Get a Github account.
 

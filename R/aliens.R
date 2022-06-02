@@ -17,7 +17,7 @@
 #' ----------------------------------------------------------------------------
 
 # run this command to get all the packages we'll use:
-# install.packages(c('tidyverse', 'googlesheets4','rmarkdown','leaftlet')
+# install.packages(c('tidyverse', 'googlesheets4','rmarkdown','leaftlet'))
 
 # load tidyverse package
 library(tidyverse)
@@ -33,13 +33,3 @@ signals |> summary()
 #' *What should we do to start?*
 #' *Put your suggestions in the chat*
 
-signals |>
-  pivot_longer(everything()) |>
-  ggplot(aes(value)) +
-  geom_histogram() +
-  facet_wrap(~name)
-
-signals |>
-  ggplot(aes(amplitude, frequency)) +
-  geom_point() +
-  coord_flip()

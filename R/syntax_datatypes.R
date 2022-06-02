@@ -14,6 +14,8 @@
 #'
 ##################################################
 
+
+
 ##----------------------------------------------##
 #' 1. assign an object to a name with <-
 ##----------------------------------------------##
@@ -39,6 +41,10 @@ print(my_value * 10)
 rm(my_value)
 
 
+
+
+
+##----------------------------------------------##
 #' primitive data types
 ##----------------------------------------------##
 # we've seen this type
@@ -58,6 +64,11 @@ rm(list = ls())
 
 #' restart R with 'cmd + shft + 0'
 
+
+
+
+
+
 ##----------------------------------------------##
 #' coerce data from one class to another
 ##----------------------------------------------##
@@ -72,13 +83,40 @@ as.logical(fct_val)
 as.numeric(fct_val)
 as.logical(as.numeric(fct_val))
 
+
+# data types are important because they add semantic meaning to the characters.
+# Certain operations are only valid on specific data types...
+
+
+
+
+
+
+
 ##----------------------------------------------##
-#' we can do all the **math** you want
+#' R is great for **math**
 ##----------------------------------------------##
 # + - * / ** // log exp sin cos tan  %/% %% ....
 
 9 %/% 2
 9 %% 2
+
+# generate sequences of data
+1:100
+seq(100)
+
+# simulate data from a distribution
+normal_data <- rnorm(100, mean = 0, sd = 1)
+normal_data
+
+# there are plenty of stats functions built in
+mean(normal_data)
+sd(normal_data)
+
+
+
+
+
 
 ##----------------------------------------------##
 #' ...or **boolean** algebra
@@ -86,31 +124,72 @@ as.logical(as.numeric(fct_val))
 # | 'or'
 # & 'and'
 # ! 'not'
+
 a <- T
 b <- F
 
-a | b      # true
-a & b      # false
-!a         # false
+# *what will be the value returned from these expressions?*
+a | b
+a & b
+!a
 
 # what does this return and why?
 (a | b) & !(a & b)
 
-# 'xor': one or the other is true but not both
-xor(T, F)
-
-# xor <- function(x, y){
-#   # cat("powered by Jason\n")
-#   (x | y) & !(x & y)
-# }
-# xor |> View()
-
-xor(T, T)
-xor(T, F)
-xor(F, T)
-xor(F, F)
-
 # congrats, you've just learned boolean algebra
+
+# there are other operators that you are already familiar with
+# <, >, ==, !=, >=, <=
+
+# %in% tests for membership
+
+'a' %in% letters
+99 %in% letters
+
+
+
+
+
+
+
+##----------------------------------------------##
+#' Functions
+##----------------------------------------------##
+# Lets' write a function with our boolean expression that evaluates xor
+
+xor <- function(a, b){
+  return((a | b) & !(a & b))
+}
+# xor(a,b): returns TRUE if A or B is true but not both, else returns FALSE
+
+# test it out
+xor(T, F)
+xor(F, F)
+xor(T, T)
+
+
+
+
+
+
+
+##----------------------------------------------##
+#' **if/else**
+##----------------------------------------------##
+# 'if' statements are a way to control what the code does depending on the data
+
+# consider some code that informs us whether some value is negative or positive
+value <- -2
+
+if (value < 0) {
+  print('value is negative')
+} else {
+  print('value is positive')
+}
+
+
+
+
 
 
 ##----------------------------------------------##
@@ -133,38 +212,42 @@ is.numeric('some text')
 
 
 #' *which is.<class> function would return true for text input?*
+
 # uncomment the next line (cmd + C), delete <class>,
 # and hit tab to get autocompletion
 
 # is.<class>('some text')
 
 
-#' *combine ... into a vector with c()*
+
+
+
+#' *combine '...' values into a vector with c()*
 ##----------------------------------------------##
 my_vector <- c(1, 2, 3)
 my_vector
+length(my_vector)
+
 
 #' *vectorized operations*
 ##----------------------------------------------##
 #' most functions that operate on a single value will
 #' also do the operation *for each* value in a vector
-my_vector * 2
+my_vector2 <- my_vector * 2
 
-paste('number:', my_vector)
+paste('number:', my_vector2)
 
-
-#' *subset with indices (generally discouraged)*
+#' subset with indices
 ##----------------------------------------------##
-those_are_useful_for_xxx <- 1:10
-another_vector <- letters[those_are_useful_for_xxx]
+another_vector <- letters[1:10]
 
-
-#' *vectors can't have different types of data*
+#' vectors can't have different types of data
+#' coercion to simplest type will occur where possible
 ##----------------------------------------------##
-my_vector <- c(1, 2, 3, '?')
-print(my_vector)
+my_vector <- c(1, 2, 3, 'text')
+str(my_vector)
 class(my_vector)
-as.numeric(my_vector)
+
 
 ##----------------------------------------------##
 #' *lists can store all types of data, including other lists
@@ -211,6 +294,8 @@ patient$dose[1]
 patient[1, 'dose']
 
 # A better data structure is the 'tibble' from tidyverse
+tibble::as_tibble(patient)
+
 # it allows you to work with columns with lists
 tibble::tibble(
   group = 'A',
@@ -222,5 +307,3 @@ tibble::tibble(
 ) |>
   tibble::glimpse()
 
-as.data.frame(patient)
-tibble::as_tibble(patient)

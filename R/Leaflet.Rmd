@@ -14,29 +14,26 @@ editor_options:
 .leaflet {
     margin: auto;
 }
-h2,h3,h4 {
-  font-family:'lobster';
-  color:#35518f
-}
 </style>
 ```
 
-<h1>
-# [Learner Map Demo]{style="font-family:'lobster'; color:#ff3599"}📍🗺
-</h1>
-------------------------------------------------------------------------
+# [Learner Map Demo]{style="color:#ff3599"}📍🗺
 
-#### 👋 Welcome! 👋
+--------------------------------------------------------------
 
-This is a short vignette to show you how easy it can be to create
-impressive figures and documents with R and Rmarkdown.
+This is a short demo to show you how easy it can be to create
+impressive figures and documents with R and Rmarkdown. I'll put the code into the chat so that you can create the map too!
+  
+-----
 
-------------------------------------------------------------------------
+## Do this to start
 
-#### Do this to start
+-   Go to Google maps, find your area, right-click and copy your coordinates (latitude, longitude).
+-   Paste your coordinates into this form here: <https://forms.gle/1XoxfkhGLxqEHik9A>
 
--   Go to Google maps, find your area (not exact location), right-click and copy your coordinates (latitude, longitude).
--   Paste your coordinates here: <https://forms.gle/1XoxfkhGLxqEHik9A>
+-   Open a new R script (top left button in Rstudio)
+-   Paste in code. 
+-   Install packages
 
 --------------------------------------------------------------
 
@@ -48,8 +45,8 @@ knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
 # install.packages(c('tidyverse', 'leaflet', 'googlesheets4'))
 # load packages
 library(tidyverse)
-library(leaflet)
 library(googlesheets4)
+library(leaflet)
 ```
 
 --------------------------------------------------------------
@@ -66,13 +63,13 @@ that anyone can read from.
 
 (You'll need a google account to their API. `googlesheets4` will prompt
 you to set up an access token for your account, then Google will ask you
-to confirm that you want to allow the tidyverse API to access your files
--\> check the box that allows the Tidyverse API
+to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API  to have it's way with your files, or else your requests will be denied.
 
 ```{r}
 coords <-
   # read data from this url
-  googlesheets4::read_sheet( "https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing")
+  "https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing" |> 
+  googlesheets4::read_sheet()
 
 # preview data
 coords |> head()
@@ -101,14 +98,14 @@ coords |> head()
 
 --------------------------------------------------------------
 
-## [Leaflet]{style="font-family:'lobster'; color:#35518f"}
+## Leaflet
 
 We'll use the Leaflet package to build our map in layers: canvas -\>
 background -\> data markers.
 
 <!-- this is html that wont show up in the final document -->
 
-```{r fig.height=6, fig.width=8, fig.cap="Here's our map!"}
+```{r fig.height=6, fig.width=8}
 # blank map
 leaflet::leaflet() |>
   # add the base layer style
@@ -132,7 +129,7 @@ leaflet::leaflet() |>
 
 --------------------------------------------------------------
 
-##  [ Pretty cool, right! ]{style="font-family:'lobster'; color:#35518f"}
+## Pretty cool, right!?
 
 Now that you've seen the potential rewards of working with R, Let's back it up a bit and give you a crash course in the
 basics. Then we'll get back to making fun visualizations.

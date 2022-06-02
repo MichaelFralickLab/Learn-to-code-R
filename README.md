@@ -1,4 +1,4 @@
-# Super-brief guide to research data analysis
+# Learn to Code: R for research data analysis
   
 ### Schedule
 
@@ -10,11 +10,12 @@ Getting setup in R
 #### June 2: R 101
 
 - Orientation in Rstudio
+- First demo
+- Map demo
 - R syntax
 - primitives and sets of data
 - math and logic, operators
 - functions with `readr`
-
 
 #### June 9: Data analysis II
 
@@ -25,8 +26,8 @@ Getting setup in R
 
 #### June 16: Data analysis II
 
-- Data analysis scripting
-- Handling text, dates, factors; 
+- Data analysis scripting II
+- Handling text, dates, factors; regex.
 - Regular expressions and string interpolation
 - Nesting data and functional programming. 
 

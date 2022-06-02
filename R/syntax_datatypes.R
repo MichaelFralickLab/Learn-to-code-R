@@ -1,5 +1,3 @@
-# https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/syntax_datatypes.R
-
 ##################################################
 ## Project: R syntax and datatypes. My first R script!
 ##################################################
@@ -9,22 +7,25 @@
 #' Think of this as watching the opening credits for a movie:
 #' it's a brief intro to the things we'll be exposed to later.
 #'
-#' These examples are simple to expose the basic mechanics of R.
-#' Don't follow along here, just focus, the examples are short and simple.
+#' The examples are trivial to focus the basics of code and data.
+#' Don't type along here, just try to capture what is happening.
 #'
-##################################################
-
+#'
+#'
+#' https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/syntax_datatypes.R
+#################################################
 
 
 ##----------------------------------------------##
 #' 1. assign an object to a name with <-
 ##----------------------------------------------##
 # name <- expression
-# use keyboard shortcut for <- :
-# 'alt' and '-'  on windows
+
+# use keyboard shortcut for <-
+  # 'alt' and '-'  on windows
 # 'option' and '-' on Mac
 
-# store a value
+# store a value in memory...
 my_value <- 5
 
 # so that we can use it later
@@ -56,18 +57,17 @@ lgl_val <- TRUE
 fct_val <- factor('category1')
 date_val <- Sys.Date()
 missing_val <- NA
-nothing <- NULL
+not_a_number <- sqrt(-1)
+empty_container <- NULL
+
+# integer has an L after it
+int_val <- 5L
 
 #' Check out the environment panel, both 'list' and 'grid' views
 # now let's clear out all the objects we created (like the broom button)
 rm(list = ls())
 
 #' restart R with 'cmd + shft + 0'
-
-
-
-
-
 
 ##----------------------------------------------##
 #' coerce data from one class to another
@@ -141,8 +141,7 @@ a & b
 # there are other operators that you are already familiar with
 # <, >, ==, !=, >=, <=
 
-# %in% tests for membership
-
+# %in% tests for membership in a set
 'a' %in% letters
 99 %in% letters
 
@@ -264,7 +263,7 @@ print(patient)
 str(patient)
 
 # access values by name
-dose <- patient$dose
+dose <- patient$dose[1]
 
 # increase dose
 dose + 5
@@ -306,4 +305,19 @@ tibble::tibble(
   parents = list(c('Alice', 'Bob'))
 ) |>
   tibble::glimpse()
+
+
+# there are lots of built in datasets
+iris
+
+
+# did I talk about 'the pipe' yet?
+iris |>  tibble::tibble()
+iris |>  tibble::tibble() |> tibble::glimpse()
+
+
+
+## Okay!! Now, we're ready to look at how to manipulate tabular data with dplyr!
+
+
 

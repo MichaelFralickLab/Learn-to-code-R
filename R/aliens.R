@@ -14,10 +14,11 @@
 #'
 #' *Can you find any patterns in the data?*
 #' *Don't worry about coding along, this is just a demo!*
-#' ----------------------------------------------------------------------------
+#' -------------------------------------------------------------------------
 
-# run this command to get all the packages we'll use:
+# uncomment and run this command to get all the packages we'll use today:
 # install.packages(c('tidyverse', 'googlesheets4','rmarkdown','leaftlet'))
+
 
 # load tidyverse package
 library(tidyverse)

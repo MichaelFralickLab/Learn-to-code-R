@@ -1,0 +1,12 @@
+# repository
+https://github.com/jmoggridge/Learn-to-code-R
+
+# alien signals
+https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/aliens.R
+
+# leaflet map rmarkdown
+https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/Leaflet.Rmd
+
+# syntax and data types
+https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/syntax_datatypes.R
+

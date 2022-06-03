@@ -51,17 +51,21 @@ rm(my_value)
 # we've seen this type
 dbl_val <- 1.2
 
+# integer has an L after it
+int_val <- 5L
+
 # but not seen these
 chr_val <- 'text or string data'
-lgl_val <- TRUE
+lgl_val <- FALSE
+
 fct_val <- factor('category1')
 date_val <- Sys.Date()
+
+#
 missing_val <- NA
 not_a_number <- sqrt(-1)
 empty_container <- NULL
 
-# integer has an L after it
-int_val <- 5L
 
 #' Check out the environment panel, both 'list' and 'grid' views
 # now let's clear out all the objects we created (like the broom button)
@@ -74,6 +78,8 @@ rm(list = ls())
 ##----------------------------------------------##
 fct_val <- factor('category1')
 class(fct_val)
+is.factor(fct_val)
+is.character(fct_val)
 
 chr_val <- as.character(fct_val)
 chr_val

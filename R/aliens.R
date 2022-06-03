@@ -34,8 +34,11 @@ signals |> summary()
 #' *What should we do to start?*
 #' *Put your suggestions in the chat*
 
+ggplot(data = signals, aes(frequency)) +
+  geom_histogram()
 
-
+ggplot(data = signals, aes(frequency, amplitude)) +
+  geom_point()
 
 
 

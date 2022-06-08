@@ -90,39 +90,58 @@ as.numeric(fct_val)
 as.logical(as.numeric(fct_val))
 
 
-# data types are important because they add semantic meaning to the characters.
-# Certain operations are only valid on specific data types...
-
-
-
-
-
-
 
 ##----------------------------------------------##
-#' R is great for **math**
+#' *Welcome Back*
 ##----------------------------------------------##
-# + - * / ** // log exp sin cos tan  %/% %% ....
 
-9 %/% 2
-9 %% 2
+# last time we finished up after introducing data types.
 
-# generate sequences of data
+# Data types are important because they add semantic meaning to the characters in our data (eg. numbers have mathematical meaning, dates fall on a timeline, etc.).
+
+#' *Certain operations are only valid on specific data types*
+
+# this operation makes no sense
+'a' + 'b'
+
+# but works when we use numbers
+pi + pi
+
+##----------------------------------------------##
+#' R is a calculator
+##----------------------------------------------##
+
+# binary operators
+# + - * / **  %/% %% ....
+9 + 2
+9 - 2
+9 * 2
+9 / 2
+
+9 %/% 2 # floor division
+9 %% 2  # modulo (remainder)
+
+# functions to transform values: eg. log exp sin cos tan abs
+log(9, base = 2)
+abs(-4.25)
+
+# we can generate even sequences of data
 1:100
-seq(100)
+seq(2, 100, by = 2.5860)
 
-# simulate data from a distribution
-normal_data <- rnorm(100, mean = 0, sd = 1)
-normal_data
+# simulate 1000 obs from a standard normal distribution
+normal_data <- rnorm(n = 10**4, mean = 0, sd = 1)
+
+# base:*():  plots is easy (when dealing with univariate data)
+base::hist(normal_data)
 
 # there are plenty of stats functions built in
 mean(normal_data)
 sd(normal_data)
+median(normal_data)
+quantile(normal_data, probs = c(0, 0.25, 0.5, 0.75, 0.8999))
 
-
-
-
-
+ecdf(normal_data) |> plot()
 
 ##----------------------------------------------##
 #' ...or **boolean** algebra
@@ -142,8 +161,6 @@ a & b
 # what does this return and why?
 (a | b) & !(a & b)
 
-# congrats, you've just learned boolean algebra
-
 # there are other operators that you are already familiar with
 # <, >, ==, !=, >=, <=
 
@@ -151,7 +168,12 @@ a & b
 'a' %in% letters
 99 %in% letters
 
+# check a bunch of value for any or all true?
+any(F, F, F, T)
+all(T, T, T, F)
 
+
+# congrats, you're an expert in boolean algebra now
 
 
 
@@ -162,19 +184,17 @@ a & b
 ##----------------------------------------------##
 # Lets' write a function with our boolean expression that evaluates xor
 
-xor <- function(a, b){
-  return((a | b) & !(a & b))
-}
+jasons_awesome_xor <- function(a, b) {
+  xor_result <- (a | b) & !(a & b)
+  return(xor_result)
+  }
+
 # xor(a,b): returns TRUE if A or B is true but not both, else returns FALSE
 
 # test it out
-xor(T, F)
-xor(F, F)
-xor(T, T)
-
-
-
-
+jasons_awesome_xor(T, F)
+jasons_awesome_xor(F, F)
+jasons_awesome_xor(T, T)
 
 
 
@@ -184,21 +204,29 @@ xor(T, T)
 # 'if' statements are a way to control what the code does depending on the data
 
 # consider some code that informs us whether some value is negative or positive
-value <- -2
+value <- -0.5
 
-if (value < 0) {
-  print('value is negative')
+if (value < -1) {
+ 'value is negative'
 } else {
-  print('value is positive')
+  'value is positive'
 }
 
+# else if (value > -1 & value < 0) {
+#   'tiny bit negative'
+# }
 
+
+# this is a more compact vectorized representation
+ifelse(test = value < 0, # an expression that evaluate to t/f for each value
+       yes = 'value is negative',
+       no = 'value is positive')
 
 
 
 
 ##----------------------------------------------##
-#' **vectors**
+#' **vectors and indexing**
 ##----------------------------------------------##
 # any single value is already a vector...
 print('some text')
@@ -210,24 +238,12 @@ is.vector(1)
 length('some text')
 nchar('some text')
 
-
 # use is.* functions to test
 is.vector('some text')
 is.numeric('some text')
 
 
-#' *which is.<class> function would return true for text input?*
-
-# uncomment the next line (cmd + C), delete <class>,
-# and hit tab to get autocompletion
-
-# is.<class>('some text')
-
-
-
-
-
-#' *combine '...' values into a vector with c()*
+#' *combine values into a vector with c()*
 ##----------------------------------------------##
 my_vector <- c(1, 2, 3)
 my_vector
@@ -236,21 +252,28 @@ length(my_vector)
 
 #' *vectorized operations*
 ##----------------------------------------------##
+
+my_vector > 1.5
+
 #' most functions that operate on a single value will
 #' also do the operation *for each* value in a vector
-my_vector2 <- my_vector * 2
+
+my_vector * 2
 
 paste('number:', my_vector2)
 
-#' subset with indices
+#' subset a vector with another vector of indices
 ##----------------------------------------------##
-another_vector <- letters[1:10]
+letters
+letters[1:10]
+letters[c(10, 1, 19, 15, 14)]
 
 #' vectors can't have different types of data
 #' coercion to simplest type will occur where possible
 ##----------------------------------------------##
 my_vector <- c(1, 2, 3, 'text')
-str(my_vector)
+my_vector
+str(my_vector) # structure function
 class(my_vector)
 
 
@@ -263,43 +286,35 @@ patient <- list(
   age = 58,
   treatment = T,
   dose = 30,
-  parents = list('Bob', 'Alice')
+  diagnoses = list('diabetes', 'gout')
 )
 print(patient)
 str(patient)
 
-# access values by name
-dose <- patient$dose[1]
+# access values by name with $ operator *prefrred
+patient$dose[1]
 
-# increase dose
-dose + 5
+# or by position
+patient['dose'][[1]]
 
-# or position
-dose2 <- patient[5][[1]]
-class(dose2)
+# or positions
+patient[5][[1]]
+
+# [ does subsetting, returns a list; $ pulls out the vector
 
 ##----------------------------------------------##
 ## Data.frames
 ##----------------------------------------------##
+
 #' data.frame is preferred over list if possible
-patient <- as.data.frame(patient)
-str(patient)
+patient_df <- as.data.frame(patient)
+str(patient_df)
 
-#' a table with one row
-patient <- data.frame(
-  group = 'A',
-  weight = 98,
-  age = 58,
-  treatment = T,
-  dose = 30
-)
-
-# get (first) value of dose column
-patient$dose[1]
-patient[1, 'dose']
+#' do `install.packages('tidyverse')` if you haven't already
 
 # A better data structure is the 'tibble' from tidyverse
-tibble::as_tibble(patient)
+tibble::as_tibble_row(patient)
+
 
 # it allows you to work with columns with lists
 tibble::tibble(
@@ -308,17 +323,21 @@ tibble::tibble(
   age = 58,
   treatment = T,
   dose = 30,
-  parents = list(c('Alice', 'Bob'))
+  diagnoses = list('diabetes', 'gout')
 ) |>
-  tibble::glimpse()
+  tidyr::nest(diagnoses = diagnoses)
+
+# now we have a tbl with a cell containing it's own tibble. (powerful)
 
 
-# there are lots of built in datasets
-iris
-
+# there are lots of built in datasets in R
+iris |> str()
 
 # did I talk about 'the pipe' yet?
+tibble::tibble(iris)
 iris |>  tibble::tibble()
+
+# we can the result of one function directly to the next (piping)
 iris |>  tibble::tibble() |> tibble::glimpse()
 
 

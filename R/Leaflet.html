@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-06-02" />
+<meta name="date" content="2022-06-08" />
 
 <title>Leaflet.knit</title>
 
@@ -5404,13 +5404,15 @@ files, or else your requests will be denied.</p>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># preview data</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 3
+<pre><code>## # A tibble: 6 × 3
 ##   Timestamp           longitude latitude
 ##   &lt;dttm&gt;                  &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 2022-05-29 17:29:50    -124.      48.9
 ## 2 2022-05-29 17:32:33     -75.7     45.4
 ## 3 2022-06-01 15:06:04    -124.      48.9
-## 4 2022-06-01 16:11:39    -124.      48.9</code></pre>
+## 4 2022-06-01 16:11:39    -124.      48.9
+## 5 NA                       NA       NA  
+## 6 NA                       NA       NA</code></pre>
 <hr />
 <p>Now that our data is loaded, let’s create some html-formatted text
 with details to show as popups for each marker.</p>
@@ -5427,13 +5429,15 @@ with details to show as popups for each marker.</p>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check the new column we created</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 4
+<pre><code>## # A tibble: 6 × 4
 ##   Timestamp           longitude latitude popup                                  
 ##   &lt;dttm&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                                  
 ## 1 2022-05-29 17:29:50    -124.      48.9 &quot;Responded at &lt;b&gt;2022-05-29 17:29:50&lt;/…
 ## 2 2022-05-29 17:32:33     -75.7     45.4 &quot;Responded at &lt;b&gt;2022-05-29 17:32:33&lt;/…
 ## 3 2022-06-01 15:06:04    -124.      48.9 &quot;Responded at &lt;b&gt;2022-06-01 15:06:04&lt;/…
-## 4 2022-06-01 16:11:39    -124.      48.9 &quot;Responded at &lt;b&gt;2022-06-01 16:11:39&lt;/…</code></pre>
+## 4 2022-06-01 16:11:39    -124.      48.9 &quot;Responded at &lt;b&gt;2022-06-01 16:11:39&lt;/…
+## 5 NA                       NA       NA   &quot;Responded at &lt;b&gt;NA&lt;/b&gt;&lt;br&gt;\nLat ~ &lt;b&gt;…
+## 6 NA                       NA       NA   &quot;Responded at &lt;b&gt;NA&lt;/b&gt;&lt;br&gt;\nLat ~ &lt;b&gt;…</code></pre>
 <hr />
 </div>
 <div id="leaflet" class="section level2">
@@ -5456,8 +5460,8 @@ with details to show as popups for each marker.</p>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="sc">~</span><span class="fu">str_glue</span>(<span class="st">&#39;{latitude}, {longitude}&#39;</span>),</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span>popup</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ) </span></code></pre></div>
-<div id="htmlwidget-cfb53b05456af7e29235" style="width:768px;height:576px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cfb53b05456af7e29235">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addMarkers","args":[[48.872214,45.407581,48.8733639998055,48.8723842551267],[-123.51,-75.68903,-123.513823989288,-123.511980866921],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Responded at <b>2022-05-29 17:29:50<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-05-29 17:32:33<\/b><br>\nLat ~ <b>45.41<\/b><br>\nLng ~ <b>-75.69<\/b>","Responded at <b>2022-06-01 15:06:04<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-06-01 16:11:39<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>"],null,null,null,["48.872214, -123.51","45.407581, -75.68903","48.8733639998055, -123.513823989288","48.8723842551267, -123.511980866921"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[45.407581,48.8733639998055],"lng":[-123.513823989288,-75.68903]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-827597a11fccf19e662b" style="width:768px;height:576px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-827597a11fccf19e662b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addMarkers","args":[[48.872214,45.407581,48.8733639998055,48.8723842551267,null,null,43.6574,43.709649,-79.3343801241615,43.6575557300594,43.746],[-123.51,-75.68903,-123.513823989288,-123.511980866921,null,null,79.3903,-79.3965315,43.6663144389027,-79.3911308212924,-79.284],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Responded at <b>2022-05-29 17:29:50<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-05-29 17:32:33<\/b><br>\nLat ~ <b>45.41<\/b><br>\nLng ~ <b>-75.69<\/b>","Responded at <b>2022-06-01 15:06:04<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-06-01 16:11:39<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>2022-06-02 12:32:14<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>79.39<\/b>","Responded at <b>2022-06-02 12:33:01<\/b><br>\nLat ~ <b>43.71<\/b><br>\nLng ~ <b>-79.4<\/b>","Responded at <b>2022-06-02 12:33:24<\/b><br>\nLat ~ <b>-79.33<\/b><br>\nLng ~ <b>43.67<\/b>","Responded at <b>2022-06-02 12:33:37<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>-79.39<\/b>","Responded at <b>2022-06-02 12:36:22<\/b><br>\nLat ~ <b>43.75<\/b><br>\nLng ~ <b>-79.28<\/b>"],null,null,null,["48.872214, -123.51","45.407581, -75.68903","48.8733639998055, -123.513823989288","48.8723842551267, -123.511980866921","NA, NA","NA, NA","43.6574, 79.3903","43.709649, -79.3965315","-79.3343801241615, 43.6663144389027","43.6575557300594, -79.3911308212924","43.746, -79.284"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-79.3343801241615,48.8733639998055],"lng":[-123.513823989288,79.3903]}},"evals":[],"jsHooks":[]}</script>
 <hr />
 <p><br> <br> <br> <br> <br></p>
 <hr />

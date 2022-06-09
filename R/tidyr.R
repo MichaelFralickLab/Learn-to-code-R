@@ -4,12 +4,19 @@
 #' In this segment, we'll look at a few operations that
 #' allow us to handle more complex data efficiently.
 #'
-#' We'll look at
-#' - bind - add columns or rows in block
-#' - hierarchical / nested data
-#' - how to do operations on list columns with map
-#' - pivots - making data into columns and viceversa
-#' - join - operations that involve matching rows between two tables
+#' We'll look at these functions from tidyr and purrr:
+#'
+#' - `bind_*`
+#'   * add columns or rows in block
+#' - `nest / unnest`
+#'   * become a master of hierarchical data handling
+#' - `map`
+#'   * how to repeat operations over vectors and lists
+#' - `pivot_*`s
+#'   * making data into columns and viceversa
+#' - `*_join`
+#'   * operations that involve matching rows between two tables
+#'
 #-----------------------------------------------------
 
 library(tidyverse)
@@ -40,6 +47,17 @@ pred_mass <- predict(object = model, newdata = df)
 df |>
   bind_cols(pred_mass = pred_mass) |>
   relocate(contains('mass'))
+
+
+
+
+
+
+
+
+
+
+
 
 #-----------------------------------------------------
 

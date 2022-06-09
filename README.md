@@ -1,4 +1,4 @@
-# Learn to Code: R for research data analysis
+# Learn to Code: R for data analysis
   
 ### Schedule 2022
 

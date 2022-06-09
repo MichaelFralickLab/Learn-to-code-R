@@ -8,23 +8,22 @@
 - First demo
 - Map demo
 - R syntax
-- primitives and sets of data
+- primitives
+
+#### June 9: Data analysis I
+
+- sets of data
 - math and logic, operators
-- functions with `readr`
-
-#### June 9: Data analysis II
-
-- Data analysis scripting
-- Manipulating datasets with `dplyr` and `tidyr`
-- Plotting with `ggplot2` and extensions
-- Summary statistics / linear models
+- read and write files
+- manipulating tables with `dplyr`
+- summary statistics
 
 #### June 16: Data analysis II
 
-- Data analysis scripting II
+- plotting with `ggplot2` and extensions
 - Handling text, dates, factors
 - Regular expressions and string interpolation
-- Nested data and functional programming
+- Nested data, pivots, joins, and functional programming
 
 #### June 23
 

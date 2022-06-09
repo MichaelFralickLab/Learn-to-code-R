@@ -351,11 +351,11 @@ starwars |>
 #-----------------------------------------------------
 
 
-# lets do a plot of the same data that we summarised
+# lets do a plot of the same data that we summarised earlier
 starwars |>
   ggplot(aes(mass, sex, color = sex)) +
   geom_boxplot(alpha = 0, outlier.color = NULL, color = 'gray') +
-  geom_jitter(alpha = 0.6, shape = 1, show.legend = F) +
+  # geom_jitter(alpha = 0.6, shape = 1, show.legend = F) +
   scale_x_log10() +
   theme_classic()
 
@@ -380,8 +380,16 @@ starwars |>
 #-----------------------------------------------------
 
 #' *super handy*
+
+#' `distinct` get unique combination of (input variables)
+starwars |> distinct(species, sex)
+
+# remove any duplicates in data
+bind_rows(starwars, starwars) |> distinct()
+
 #' `count` tallies observations for each combination of (input variables)
-starwars |> count(species, sex)
+starwars |> count(species, sex, sort = T)
+
 
 #' *pretty useful*
 
@@ -393,16 +401,67 @@ starwars |> relocate(starships)
 starwars |> rename(height_cm = height)
 
 #' `slice_*` functions get a subset of rows (by various criteria)
+starwars |> slice_min(birth_year) |> glimpse()
+starwars |> slice_max(birth_year) |> glimpse()
+
+#' eg. get a random sample of observations
 starwars |> slice_sample(n = 5)
 
-#'
-starwars |> dplyr::
+
 
 
 
 
 #-----------------------------------------------------
 
+#' *Run a simulation*
+#'
+#' *claim*: on average, only 63.2% of observations are represented in each bootstrap resample
+
+# this draws a bootstrap resample of equal size with replacement
+starwars |> slice_sample(n = nrow(starwars), replace = T)
+
+
+# write a function to draw a resampled dataset (from any tbl)
+draw_bootstrap <- function(data){
+  data |> dplyr::slice_sample(n = nrow(data), replace = T)
+}
+
+# write a function to get % observations represented
+analyse_bootstrap <- function(data){
+  uniques <- data |> dplyr::distinct() |> nrow() / nrow(data)
+  return(uniques)
+}
+
+# run our simulation 1000 times
+B <- 1000
+
+# create original sample dataset
+data <- tibble(x = seq(B))
+
+resamples <-
+  tibble::tibble(
+    resample_id = seq(B),
+    boot = map(resample_id, ~draw_bootstrap(data)),
+  ) |>
+  mutate(
+    prop_obs = map_dbl(boot, ~analyse_bootstrap(.x)),
+  )
+
+# summarise result
+rs_data <-
+  resamples |>
+  summarise(point_est = mean(prop_obs),
+            lower = quantile(prop_obs, p = 0.025),
+            upper = quantile(prop_obs, p = 0.975))
+
+# visualize distribution of results
+resamples |>
+  ggplot(aes(prop_obs)) +
+  geom_histogram() +
+  geom_vline(data = rs_data, aes(xintercept = point_est)) +
+  geom_vline(data = rs_data, aes(xintercept = lower), lty = 2) +
+  geom_vline(data = rs_data, aes(xintercept = upper), lty = 2)
 
 
 
@@ -410,7 +469,20 @@ starwars |> dplyr::
 
 
 
-# with across
+
+
+
+
+
+
+
+
+
+
+
+#' `across` allows us to repeat a mutate or summarise op on multiple columns
+
+# with across to compute a numeric summary for any numeric variables
 starwars |>
   group_by(species) |>
   summarise(across(
@@ -425,105 +497,4 @@ starwars |>
     stat = str_extract(name, '[^_]+$')
     )
 
-
-
-
-# using a prefix, pivoting, facetted plot from pair of variables
-starwars |>
-  select(name, where(is.numeric)) |>
-  pivot_longer(-name, names_to = 'attribute') |>
-  ggplot(aes(x = value)) +
-  geom_histogram() +
-  facet_wrap(facets = vars(attribute), scales = 'free_x', ncol = 1)
-
-
-
-
-# we can use if_else to do something based on a condition
-
-starwars |>
-  mutate()
-
-
-# iris |>
-#   as_tibble() |>
-#   filter(Sepal.Length > 5, Petal.Width < 2) |>
-#   tidylog() |>
-#   mutate(x = Sepal.Length*Sepal.Width) |>
-#   tidylog()
-
-starwars <- dplyr::starwars
-
-species_lookup <- starwars |>
-  count(species, sort = T) |>
-  transmute(
-    species,
-    pooled_species = if_else(condition = (n == 1), 'Other', species)
-  )
-
-starwars |>
-  left_join(species_lookup, by = "species") |>
-  glimpse()
-
-
-
-
-starwars |>
-  select(name, starships) |>
-  tidylog() |>
-  unnest(cols = c(starships)) |>
-  tidylog() |>
-  ggplot(aes(y = name, x = starships)) +
-  geom_point() +
-  scale_x_discrete(position = 'top') +
-  theme(axis.text.x.top = element_text(angle = 60, hjust = 0))
-
-
-starwars |>
-  left_join(species_lookup, by = "species") |>
-  mutate(pooled_species = replace_na(pooled_species, 'Other')) |>
-  filter(pooled_species %in% c('Human', 'Droid')) |>
-  ggplot(aes(height, mass, color = pooled_species)) +
-  geom_point(alpha = 0.5) +
-  ggrepel::geom_text_repel(aes(label = name)) +
-  geom_smooth(size = 0.5, span = 1.1) +
-  scale_y_log10() +
-  facet_wrap(~species, scales = 'free', ncol = 1) +
-  theme(legend.position = 'none')
-
-df <- starwars |>
-  filter(species %in% c('Human', 'Droid')) |>
-  select(species, height, mass, gender)
-
-loe
-
-library(broom)
-
-model_rs <-
-  tribble(
-    ~formula, ~model,
-    "mass ~ height", lm(formula = mass ~ height, data = df),
-    "mass ~ height + species", lm(formula = mass ~ height + species, data = df),
-    "mass ~ height + species*height", lm(formula = mass ~ height + species*height, data = df)
-  ) |>
-  mutate(tidy = map(model, tidy),
-         glance = map(model, glance),
-         augment = map(model, augment)
-  )
-
-model_rs |>
-  select(formula, tidy) |>
-  unnest(tidy) |>
-  view()
-
-
-lm(formula = mass ~ height, data = human_v_droid_sizes)
-
-lm(formula = mass ~ height + species, data = human_v_droid_sizes) |> broom::tidy()
-lm(formula = mass ~ height, data = human_v_droid_sizes) |> broom::tidy()
-lm(formula = mass ~ height, data = human_v_droid_sizes) |> broom::glance()
-
-lm(formula = mass ~ height + species + gender, data = human_v_droid_sizes) |> summary()
-
-# starwars |> filter(is.na(species)) |> view()
 

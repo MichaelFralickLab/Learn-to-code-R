@@ -53,17 +53,17 @@ library(leaflet)
 
 ## Google API
 
-Google offers an Application Programming Interface (API) to work with
-files stored in the cloud through code.
+Google offers an Application Programming Interface (API) to work with files stored in the cloud through code.
 <!-- API is a really general term that basically means software that coders use as part of their projects. -->
 
 The data you entered into the form are collected into a
 [spreadsheet](https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit#gid=719575535)
 that anyone can read from.
 
-(You'll need a google account to their API. `googlesheets4` will prompt
-you to set up an access token for your account, then Google will ask you
-to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API  to have it's way with your files, or else your requests will be denied.
+You will need a Google account to access the coordinates spreadsheet with the [`googlesheets4` R package](https://googlesheets4.tidyverse.org/).  
+When you run the `read_sheet()` function with the *docs.google.com* url as input, `googlesheets4` should prompt you to set up an access token for your Google account, then Google will ask you to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API to edit your files, or else your requests will be denied.
+
+If still having issues authenticating with Google to get `googlesheets4::read_sheet()` to work, try visiting 
 
 ```{r}
 coords <-
@@ -102,8 +102,6 @@ coords |> head()
 
 We'll use the Leaflet package to build our map in layers: canvas -\>
 background -\> data markers.
-
-<!-- this is html that wont show up in the final document -->
 
 ```{r fig.height=6, fig.width=8}
 # blank map

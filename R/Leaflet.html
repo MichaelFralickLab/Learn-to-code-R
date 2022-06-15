@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-06-09" />
+<meta name="date" content="2022-06-14" />
 
 <title>Leaflet.knit</title>
 
@@ -5391,23 +5391,26 @@ files stored in the cloud through code.
 <!-- API is a really general term that basically means software that coders use as part of their projects. --></p>
 <p>The data you entered into the form are collected into a <a href="https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit#gid=719575535">spreadsheet</a>
 that anyone can read from.</p>
-<p>(You’ll need a google account to their API.
+<p>You will need a Google account to access the coordinates spreadsheet
+with the <a href="https://googlesheets4.tidyverse.org/"><code>googlesheets4</code> R
+package</a>.<br />
+When you run the <code>read_sheet()</code> function with the
+<em>docs.google.com</em> url as input for the first time,
 <code>googlesheets4</code> will prompt you to set up an access token for
-your account, then Google will ask you to confirm that you want to allow
-the tidyverse API to access your files. Make sure to <strong>check the
-box</strong> that allows the Tidyverse API to have it’s way with your
-files, or else your requests will be denied. If still having issues with
-credentials even after setting up a google account, try using the gargle
-package to setup access tokens <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a>)</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_email =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># read data from this url</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing&quot;</span> <span class="sc">|&gt;</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  googlesheets4<span class="sc">::</span><span class="fu">read_sheet</span>()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># preview data</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
+your Google account, then Google will ask you to confirm that you want
+to allow the tidyverse API to access your files. Make sure to
+<strong>check the box</strong> that allows the Tidyverse API to edit
+your files, or else your requests will be denied.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use any token in the environment for auth if available</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_email =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read data from this url</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing&quot;</span> <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  googlesheets4<span class="sc">::</span><span class="fu">read_sheet</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># preview data</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   Timestamp           longitude latitude
 ##   &lt;dttm&gt;                  &lt;dbl&gt;    &lt;dbl&gt;
@@ -5423,16 +5426,17 @@ with details to show as popups for each marker.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate() creates a new column that we&#39;ve called &#39;popup&#39;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># str_glue() inserts our data variables into a text template,</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variables are referenced by name in code expressions wrapped with {}</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> coords <span class="sc">|&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">popup =</span> <span class="fu">str_glue</span>(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Responded at &lt;b&gt;{Timestamp}&lt;/b&gt;&lt;br&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">     Lat ~ &lt;b&gt;{round(latitude, 2)}&lt;/b&gt;&lt;br&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">     Lng ~ &lt;b&gt;{round(longitude, 2)}&lt;/b&gt;&#39;</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check the new column we created</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  coords <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">popup =</span> <span class="fu">str_glue</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Responded at &lt;b&gt;{Timestamp}&lt;/b&gt;&lt;br&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">     Lat ~ &lt;b&gt;{round(latitude, 2)}&lt;/b&gt;&lt;br&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">     Lng ~ &lt;b&gt;{round(longitude, 2)}&lt;/b&gt;&#39;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># check the new column we created</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>coords <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ##   Timestamp           longitude latitude popup                                  
 ##   &lt;dttm&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                                  
@@ -5448,7 +5452,6 @@ with details to show as popups for each marker.</p>
 <h2>Leaflet</h2>
 <p>We’ll use the Leaflet package to build our map in layers: canvas
 -&gt; background -&gt; data markers.</p>
-<!-- this is html that wont show up in the final document -->
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># blank map</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>leaflet<span class="sc">::</span><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add the base layer style</span></span>
@@ -5464,8 +5467,8 @@ with details to show as popups for each marker.</p>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="sc">~</span><span class="fu">str_glue</span>(<span class="st">&#39;{latitude}, {longitude}&#39;</span>),</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span>popup</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ) </span></code></pre></div>
-<div id="htmlwidget-2b9b7bf90e85cdd9bf3a" style="width:768px;height:576px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2b9b7bf90e85cdd9bf3a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addMarkers","args":[[48.872214,45.407581,48.8733639998055,48.8723842551267,null,null,43.6574,43.709649,-79.3343801241615,43.6575557300594,43.746],[-123.51,-75.68903,-123.513823989288,-123.511980866921,null,null,79.3903,-79.3965315,43.6663144389027,-79.3911308212924,-79.284],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Responded at <b>2022-05-29 17:29:50<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-05-29 17:32:33<\/b><br>\nLat ~ <b>45.41<\/b><br>\nLng ~ <b>-75.69<\/b>","Responded at <b>2022-06-01 15:06:04<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-06-01 16:11:39<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>2022-06-02 12:32:14<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>79.39<\/b>","Responded at <b>2022-06-02 12:33:01<\/b><br>\nLat ~ <b>43.71<\/b><br>\nLng ~ <b>-79.4<\/b>","Responded at <b>2022-06-02 12:33:24<\/b><br>\nLat ~ <b>-79.33<\/b><br>\nLng ~ <b>43.67<\/b>","Responded at <b>2022-06-02 12:33:37<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>-79.39<\/b>","Responded at <b>2022-06-02 12:36:22<\/b><br>\nLat ~ <b>43.75<\/b><br>\nLng ~ <b>-79.28<\/b>"],null,null,null,["48.872214, -123.51","45.407581, -75.68903","48.8733639998055, -123.513823989288","48.8723842551267, -123.511980866921","NA, NA","NA, NA","43.6574, 79.3903","43.709649, -79.3965315","-79.3343801241615, 43.6663144389027","43.6575557300594, -79.3911308212924","43.746, -79.284"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-79.3343801241615,48.8733639998055],"lng":[-123.513823989288,79.3903]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-39e1c3e553eb0e508711" style="width:768px;height:576px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-39e1c3e553eb0e508711">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addMarkers","args":[[48.872214,45.407581,48.8733639998055,48.8723842551267,null,null,43.6574,43.709649,-79.3343801241615,43.6575557300594,43.746,43.2666407527073],[-123.51,-75.68903,-123.513823989288,-123.511980866921,null,null,79.3903,-79.3965315,43.6663144389027,-79.3911308212924,-79.284,-79.9554869177463],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Responded at <b>2022-05-29 17:29:50<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-05-29 17:32:33<\/b><br>\nLat ~ <b>45.41<\/b><br>\nLng ~ <b>-75.69<\/b>","Responded at <b>2022-06-01 15:06:04<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>2022-06-01 16:11:39<\/b><br>\nLat ~ <b>48.87<\/b><br>\nLng ~ <b>-123.51<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>NA<\/b><br>\nLat ~ <b>NA<\/b><br>\nLng ~ <b>NA<\/b>","Responded at <b>2022-06-02 12:32:14<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>79.39<\/b>","Responded at <b>2022-06-02 12:33:01<\/b><br>\nLat ~ <b>43.71<\/b><br>\nLng ~ <b>-79.4<\/b>","Responded at <b>2022-06-02 12:33:24<\/b><br>\nLat ~ <b>-79.33<\/b><br>\nLng ~ <b>43.67<\/b>","Responded at <b>2022-06-02 12:33:37<\/b><br>\nLat ~ <b>43.66<\/b><br>\nLng ~ <b>-79.39<\/b>","Responded at <b>2022-06-02 12:36:22<\/b><br>\nLat ~ <b>43.75<\/b><br>\nLng ~ <b>-79.28<\/b>","Responded at <b>2022-06-11 20:43:37<\/b><br>\nLat ~ <b>43.27<\/b><br>\nLng ~ <b>-79.96<\/b>"],null,null,null,["48.872214, -123.51","45.407581, -75.68903","48.8733639998055, -123.513823989288","48.8723842551267, -123.511980866921","NA, NA","NA, NA","43.6574, 79.3903","43.709649, -79.3965315","-79.3343801241615, 43.6663144389027","43.6575557300594, -79.3911308212924","43.746, -79.284","43.2666407527073, -79.9554869177463"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-79.3343801241615,48.8733639998055],"lng":[-123.513823989288,79.3903]}},"evals":[],"jsHooks":[]}</script>
 <hr />
 <p><br> <br> <br> <br> <br></p>
 <hr />

@@ -53,24 +53,24 @@ library(leaflet)
 
 ## Google API
 
-Google offers an Application Programming Interface (API) to work with
-files stored in the cloud through code.
+Google offers an Application Programming Interface (API) to work with files stored in the cloud through code.
 <!-- API is a really general term that basically means software that coders use as part of their projects. -->
 
 The data you entered into the form are collected into a
 [spreadsheet](https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit#gid=719575535)
 that anyone can read from.
 
-(You'll need a google account to their API. `googlesheets4` will prompt
-you to set up an access token for your account, then Google will ask you
-to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API to have it's way with your files, or else your requests will be denied. If still having issues with credentials even after setting up a google account, try using the gargle package to setup access tokens https://gargle.r-lib.org/articles/non-interactive-auth.html)
+
+You will need a Google account to access the coordinates spreadsheet with the [`googlesheets4` R package](https://googlesheets4.tidyverse.org/).  
+When you run the `read_sheet()` function with the *docs.google.com* url as input for the first time, `googlesheets4` will prompt you to set up an access token for your Google account, then Google will ask you to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API to edit your files, or else your requests will be denied.
 
 
 ```{r}
+# use any token in the environment for auth if available
 options(gargle_oauth_email = TRUE)
 
+# read data from this url
 coords <-
-  # read data from this url
   "https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing" |> 
   googlesheets4::read_sheet()
 
@@ -106,8 +106,6 @@ coords |> head()
 
 We'll use the Leaflet package to build our map in layers: canvas -\>
 background -\> data markers.
-
-<!-- this is html that wont show up in the final document -->
 
 ```{r fig.height=6, fig.width=8}
 # blank map

@@ -29,17 +29,13 @@ library(tidyverse)
 # easy to stack tables with same column names
 bind_rows(starwars, starwars) |> arrange(name)
 
-# watch out not to do something non-sensical like this though
+# watch out not to do something nonsensical like this though
 bind_rows(starwars, iris) |> view()
 
 'cols'
 
 # imagine we have a linear model
 model <- lm(mass ~ height, data = starwars)
-summary(model)
-
-# imagine we have a linear model
-model <- lm(height ~ mass, data = starwars)
 summary(model)
 
 pred_mass <- predict(object = model, newdata = df)

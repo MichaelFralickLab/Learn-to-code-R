@@ -63,9 +63,12 @@ that anyone can read from.
 
 (You'll need a google account to their API. `googlesheets4` will prompt
 you to set up an access token for your account, then Google will ask you
-to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API  to have it's way with your files, or else your requests will be denied.
+to confirm that you want to allow the tidyverse API to access your files. Make sure to **check the box** that allows the Tidyverse API to have it's way with your files, or else your requests will be denied. If still having issues with credentials even after setting up a google account, try using the gargle package to setup access tokens https://gargle.r-lib.org/articles/non-interactive-auth.html)
+
 
 ```{r}
+options(gargle_oauth_email = TRUE)
+
 coords <-
   # read data from this url
   "https://docs.google.com/spreadsheets/d/1EpByX-P6ou74xqcTF4gX388g-zbMEHPyHsBZADyMhsU/edit?usp=sharing" |> 
@@ -84,7 +87,8 @@ details to show as popups for each marker.
 # mutate() creates a new column that we've called 'popup'
 # str_glue() inserts our data variables into a text template,
 # variables are referenced by name in code expressions wrapped with {}
-coords <- coords |>
+coords <- 
+  coords |>
   mutate(popup = str_glue(
     'Responded at <b>{Timestamp}</b><br>
      Lat ~ <b>{round(latitude, 2)}</b><br>

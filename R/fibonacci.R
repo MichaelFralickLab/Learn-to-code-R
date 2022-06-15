@@ -18,7 +18,7 @@ fibonacci(n = 2) # yay
 fibonacci(n = 10) # yay
 fibonacci(n = 1:10) # huh?
 # oh no, our function isn't vectorized!
-# it doesn't accept more than a single value because if/else handles each value differently
+# it doesn't accept more than a single value because if/else tests the entire input vector
 
 # could do iteration with a map
 # get first 10..

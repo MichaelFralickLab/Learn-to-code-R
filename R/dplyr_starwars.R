@@ -1,6 +1,8 @@
 #-------------------------------------------------------#
 #' Project: Learn to code - seminar 2
 #' Script: Starwars | dplyr and ggplot2
+#' Link: https://raw.githubusercontent.com/jmoggridge/Learn-to-code-R/main/R/dplyr_starwars.R
+#'
 #'
 #' We'll be learning how to use `dplyr` to handle tables
 #' https://dplyr.tidyverse.org/index.html
@@ -591,17 +593,18 @@ diamonds |>
 
 
 ##----------------------------------------------##
-#' *reading and writing files* with `read_*` and `write_*`
+## read/write ----
 ##----------------------------------------------##
 
-#' check your *files pane* to watch changes!
+#'*reading and writing files* with `read_*` and `write_*`
 
+#' check your *files pane* to watch changes!
 
 # create a starwars folder, suppress warning for existing
 dir.create('starwars')  |> suppressWarnings()
 
 
-## Comma-separated values (csv) ---------
+## Comma-separated values (csv) ---
 
 # write a csv file (flattens lists)
 starwars |> readr::write_csv('starwars/starwars.csv')
@@ -611,7 +614,7 @@ read_csv('starwars/starwars.csv')
 
 
 
-## R data series files (rds) ---------
+## R data series files (rds) ---
 
 # write rds binary files (keeps data types & nested data)
 starwars |>
@@ -620,9 +623,10 @@ starwars |>
 # read an rds binary
 read_rds('starwars/starwars.rds')
 
-# excel files require two packages
+# excel files ---
+# require two packages
 # can't take nested data  (drop any list columns),
-# but keeps data types
+# keeps data types
 
 starwars |>
   select(-where(is.list)) |>
@@ -638,9 +642,9 @@ readxl::read_excel('starwars/starwars.xlsx')
 
 
 
-
-
-#----------------------------------------------------
+##----------------------------------------------##
+## *regex*                                    ----
+##----------------------------------------------##
 
 #' What if we want to *match a pattern* in text data?
 #' Use `str_*` functions from `stringr`
@@ -700,7 +704,10 @@ rm(email_regex, phone_regex, string)
 
 
 
-#----------------------------------------------------
+
+##----------------------------------------------##
+## *string interpolation*                                    ----
+##----------------------------------------------##
 
 #' *string interpolation* with `str_glue` and {}
 
@@ -727,7 +734,10 @@ rm(value)
 
 
 
-#-----------------------------------------------------
+
+##----------------------------------------------##
+## more dplyr                                    ----
+##----------------------------------------------##
 
 #' *super handy*
 
@@ -779,6 +789,10 @@ ships_births |>
 
 
 
+
+
+##----------------------------------------------##
+## *across*                                    ----
 ##----------------------------------------------##
 
 #' `across` allows us to repeat a mutate/summarise
@@ -806,9 +820,12 @@ starwars |>
 
 
 
+
+##----------------------------------------------##
+## Summary table                           ----
+##----------------------------------------------##
+
 ## Let's Make a Summary Table
-
-
 cohort <-
   starwars |>
   group_by(species) |>
@@ -860,7 +877,7 @@ tbl1 |>
 
 
 ##----------------------------------------------##
-#' *other, pretty useful, dplyr functions*
+## More dplyr                                 ----
 ##----------------------------------------------##
 
 #' `relocate` columns to the left (- to the right)
@@ -877,5 +894,25 @@ starwars |> slice_max(birth_year) |> glimpse()
 
 #' eg. get a random sample of observations
 starwars |> slice_sample(n = 5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

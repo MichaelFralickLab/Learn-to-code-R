@@ -1,36 +1,46 @@
 #-------------------------------------------------------#
-## Project: Learn to code - seminar 2
-## Script: Starwars | dplyr and ggplot2
+#' Project: Learn to code - seminar 2
+#' Script: Starwars | dplyr and ggplot2
+#'
+#' We'll be learning how to use `dplyr` to handle tables
+#' https://dplyr.tidyverse.org/index.html
+#' And `ggplot2` for plotting:
+#' https://ggplot2.tidyverse.org/
+#'
 #-------------------------------------------------------#
-#'
-#'
-#'
-#'
+
+#' *before we get going...*
+# install.packages(
+#   c('tidyverse', 'tidylog', 'skimr', 'here', 'xlsx',
+#     'ggbeeswarm', 'crayon', 'gt')
+#   )
+
+#' *or at least make sure that these are installed*
+# install.packages(c('dplyr', 'ggplot2'))
+
+
 #-------------------------------------------------------#
-#  Rproject                                         ----
+#  Rprojects                                         ----
 #-------------------------------------------------------#
-#'
-#' before we get going
+
 #' _ Project workflow - create a new project _
-#'
-#'  - make `file paths` relative to the project root
-#'  - set the `working directory` to the project root
-#'  - pair excellently with `git` repos
-#'  - saves project-specific `settings`
-#'
+#'  - the `working directory` is the project root
+#'  - `file paths` are relative to the project root
+#'  - `settings` for the project
+#'  - Use `git` in tandem to manage project
+
 #' Moreinfo:
 #' https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
-#'
-#'
-#'
+
+
 #-------------------------------------------------------#
 #  Packages                                        ----
 #-------------------------------------------------------#
-#'
+
 #' `tidyverse` has all our data handling functions
 #' which come from multiple packages (`dplyr`, `ggplot2`, ..)
 #' that are all loaded by tidyverse
-#'
+
 #' `tidylog` gives nice feedback (optional, recommended)
 #' `skimr` gives a nice data summary
 #' `here` lets us use file paths relative to project root.
@@ -43,63 +53,52 @@ library(tidyverse)
 library(tidylog)
 library(skimr)
 library(here)
-#'
-#'
-#'
+
+
 #-------------------------------------------------------#
-#  Data                                            ----
+#  Data                                             ----
 #-------------------------------------------------------#
-#'
-#' We'll be learning how to use the `dplyr` package to
-#'  handle data tables today.
-#' https://dplyr.tidyverse.org/index.html
-#'
-#' This `starwars` characters dataset should be fun and
-#' familiar to you  (hopefully) but our focus is on the
-#' `functions` that we'll use to manipulate data tables.
-#'
-#' _By the way, Yoda needs your help with some data analysis since he is a terrible programmer (can't learn the syntax) _
-#'
+#' _ Yoda needs your help with some data analysis _
 #'
 #' starwars dataset
 starwars <- dplyr::starwars
 #'
-#'
+
 #'
 #-------------------------------------------------------#
 #  Using the pipe                                    ----
 #-------------------------------------------------------#
-#'
+
 #' *Chaining functions into pipelines*
-#'
-#' `data` (our tbl) is always the first argument
-#' in dplyr functions: `f(data, ...)`
-#'
-#' We can use `|>` to chain our steps together easily like:
-#'
+
+#' This is tough to read
+#' `result <- third(second(first(data, x = 1), y = 2), z = 3)`
+
+#' So we use `|>` to chain our steps together like:
 #' `result <- data |> `
 #'    `first(x = 1) |>`
 #'    `second(y = 2) |>`
 #'    `third(z = 3)`
-#'
-#' which is the same as, but easier to read than:
-#'
-#' `result <- third(second(first(data, x = 1), y = 2), z = 3)`
-#'
-#'
-#'
+
+#' `data` (our tbl) is always the first argument
+#' in dplyr functions: `f(data, ...)`
+
+
+
+
+
+
+
 #-------------------------------------------------------#
 #  Look at the data                                  ----
 #-------------------------------------------------------#
-#'
+
 #' *(these side effects don't change the data)*
-#'
+
+#' `view(data)` or cmd+click to pop the viewer screen open
 
 #' `glimpse` side-effect
 starwars |> glimpse()
-
-#' `view()` to pop the viewer screen open
-starwars |> view()
 
 #' `skim` gives a nice, quick summary of the data
 starwars |> skimr::skim()
@@ -108,43 +107,56 @@ starwars |> skimr::skim()
 
 
 
+
+
+
+
+
+
+
+
 #-------------------------------------------------------#
-# No Grogu? Stop everything ----
+# No Grogu? Stop everything                         ----
 #-------------------------------------------------------#
 
 # Test your data with code!
+# throw error if Grogu isn't in starwars names.
+ensure_grogu_present <- function(starwars){
+  if (!'Grogu' %in% starwars$name) {
+    stop("'Grogu' not found in 'starwars'")
+  }
+}
 
+# test fails at first
+ensure_grogu_present(starwars)
 
-# eg. throw error if Grogu absent from data
-if (!'Grogu' %in% starwars$name) stop("'Grogu' not found")
-
-
-# here is the row we need to add for Grogu
+# a row we need to add for Grogu
 grogu <-
   tibble(
     name = 'Grogu',
     height = 24,
     mass = 7.5,
     hair_color = 'blond',
-    # baby yoda skin  https://colorswall.com/palette/85592
-    skin_color = '#9cbb80',
+    skin_color = '#9cbb80', # https://colorswall.com/palette/85592
     eye_color = 'brown',
-    # wrap quotes like ' " ' or " ' "
-    species = "Yoda's species",
+    species = "Yoda's species", # wrap quotes like ' " ' or " ' "
     homeworld = NA,
     ) |>
   print()
 
-# append Grogu to the starwars data
+# append Grogu to the starwars data with bind_rows
 starwars <-
   starwars |>
   bind_rows(grogu) |>
   print()
 
 # test now passes, yay!
-if (!'Grogu' %in% starwars$name) stop("'Grogu' not found")
+ensure_grogu_present(starwars)
 
+# clean up the environment
 rm(grogu)
+
+
 
 
 
@@ -154,9 +166,9 @@ rm(grogu)
 ##------------------------------------------------#
 # dplyr:  one-table functions                ----
 ##------------------------------------------------#
-#'
-#' `dplyr` is a nice domain specific language for handling tables
-#'
+
+#' `dplyr` is a domain specific language for handling tables
+
 #' These are the main toolkit
 #' `select`
 #' `filter`
@@ -164,37 +176,49 @@ rm(grogu)
 #' `summarise`
 #' `group_by`
 #' `nest` and `unnest`
-#'
+
 #' With help from these to boost their power
 #' `across`
 #' `where`
 #' `tidyselect helpers`
-#'
-#' Simple and handy things you'll love
+
+#' Other simple and handy things you'll love
 #' `count`
 #' `arrange`
 #' `distinct`
 #' `rename` and `rename_with`
 #' `relocate`
-#'
-#' We'll look at these more advance ops next week
+
+#' We'll look at these more advanced operations next week
 #'  `pivot_*`
 #'  `join_*`
-#'
-#'
-#'
-#'
-#'
-#'
+
+
+
+
+
+
+
+
 ##------------------------------------------------#
 ## select                                       ----
 ##------------------------------------------------#
-#'
+
 #' `select` subsets specified columns by name
-#'
 starwars |> select(name, height, mass, sex)
 
+
 #' You try: _subset columns ending with 'color'_
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,21 +226,20 @@ starwars |> select(name, height, mass, sex)
 ##------------------------------------------------#
 ## select helpers                               ----
 ##------------------------------------------------#
-#' Imagine we have tons of column names with '_color'
+#' Imagine we have *tons of column names with '_color'*
 #' We want to subset (or drop) all of them
 #' Without writing all their names....
 #' `tidyselect helpers` - let's go!
 #' https://tidyselect.r-lib.org/reference/language.html
 
+# contains() / matches() / ends_with()
+
+
+#' What about if we wanted to *only keep certain datatypes*?
 
 
 
-#' What about if we wanted to only keep certain datatypes?
-
-
-
-#' We can subset by index, but just don't do that bc
-#' *magic numbers* don't make it clear what the code does!
+#' *just don't do magic numbers, ok?*
 
 starwars |> select(1, 2, 3, 8)
 
@@ -237,14 +260,14 @@ starwars |> select(1, 2, 3, 8)
 ##------------------------------------------------#
 ## filter                                      ----
 ##------------------------------------------------#
-#'
+
 #' `filter` keeps rows that pass a set of conditions
 #' https://dplyr.tidyverse.org/reference/filter.html
 
-#' _ Can you find the names of all the droids? _
 
-starwars |> filter(species %in% 'Droid')
-
+#'  find the names of all the droids?
+starwars |>
+  filter(species %in% 'Droid')
 
 
 #' _ Subset the non-humans, count how many there are. _
@@ -268,12 +291,14 @@ starwars |> filter(species %in% 'Droid')
 ##------------------------------------------------#
 
 #' `count` tallies observations by given variable(s)
-starwars |> count(species, sort = T)
+starwars |>
+  count(species, sort = T)
 
 
 
 #' __which (species, homeworld) is most prevalent?__
-starwars |> count(homeworld, species, sort = T)
+
+
 
 
 
@@ -281,10 +306,8 @@ starwars |> count(homeworld, species, sort = T)
 ##------------------------------------------------#
 ## arrange                                       ----
 ##------------------------------------------------#
-#'
-#' `arrange` can also sort a table
-#'
 
+#' `arrange` can also sort a table
 starwars |>
   count(species) |>
   arrange(desc(n))
@@ -293,11 +316,9 @@ starwars |>
 ##------------------------------------------------#
 ## mutate                                       ----
 ##------------------------------------------------#
-#'
+
 #' *Transforming variables*
-#'
 #' `mutate` changes a column or creates a new one
-#'
 
 # create new variable 'weight_lb'
 starwars |> mutate(weight_lb = 2.2 * mass)
@@ -306,7 +327,7 @@ starwars |> mutate(weight_lb = 2.2 * mass)
 
 
 #' __ create a variable called 'body_size' __
-#' __ which is the product of mass and height __
+#' __ 'body_size' is the product of mass and height __
 
 
 
@@ -315,10 +336,9 @@ starwars |> mutate(weight_lb = 2.2 * mass)
 ##------------------------------------------------#
 ## summarise                                       ----
 ##------------------------------------------------#
-#'
+
 #' `summarise` is similar to `mutate` but for summary statistics
 #' (where a vector is 'reduced' or 'aggregated' into a single value)
-#'
 
 starwars |>
   summarise(
@@ -327,9 +347,9 @@ starwars |>
     height_sd = sd(height),
   )
 
-# wth?
 
 
+#' *wait what ?!*
 
 
 
@@ -341,7 +361,7 @@ starwars |>
 ## Dealing with NA                             ----
 ##------------------------------------------------#
 
-# crayon for fancy colored terminal output for messages
+# use crayon for fancy colored terminal output for messages
 cat(
   crayon::bgBlue(
     crayon::bold('\n\nInterlude / PSA:'),
@@ -367,7 +387,7 @@ mean(c(NA, 1:10), na.rm = T)
 ## summarise with na.rm = T                    ----
 ##------------------------------------------------#
 
-#' now we'll fix the problem with NAs
+#' now we'll fix that earlier problem with NAs
 starwars |>
   summarise(
     n = n(),
@@ -408,14 +428,15 @@ starwars |>
 
 #' `group_by` allows us to split data for groupwise-computation
 
+# note - tbl groups: species [38]
 starwars |>
   group_by(species) |>
   glimpse()
 
+
 #' On it's own, `group_by` doesn't do much,
 #' BUT it sets up our data for later steps
 #' so we can do `summarise` and get results for each group!
-
 starwars |>
   group_by(species) |>
   summarise(
@@ -425,7 +446,18 @@ starwars |>
   )
 
 
+
+
+
+
+
 #' _ 1: get the overall median, min, and max of 'mass' _
+
+
+
+
+
+
 
 
 
@@ -460,74 +492,82 @@ starwars |>
 ##------------------------------------------------#
 
 # barplot (one or two discrete vars)
-starwars |>
-  count(sex, homeworld) |>
-  ggplot(aes(n, fct_rev(homeworld), fill = sex)) +
-  geom_col() +
-  labs(y = NULL, title = 'Starwars character homeworlds')
+# starwars |>
+#   count(sex, homeworld) |>
+#   ggplot(aes(n, fct_rev(homeworld), fill = sex)) +
+#   geom_col() +
+#   labs(y = NULL, title = 'Starwars character homeworlds')
+
+
 
 # scatter (two continuous + shape, color, size, alpha)
-starwars |>
-  mutate(is_human = species %in% 'Human') |>
-  filter(is_human) |>
-  ggplot(aes(mass, height,
-             color = birth_year,
-  )) +
-  geom_point(alpha = 0.75) +
-  ggrepel::geom_text_repel(aes(label = name),
-                           size = 4, alpha = 0.85) +
-  scale_color_viridis_c(option = 'C', end = 0.9) +
-  theme_bw()
+# starwars |>
+#   mutate(is_human = species %in% 'Human') |>
+#   filter(is_human) |>
+#   ggplot(aes(mass, height,
+#              color = birth_year,
+#   )) +
+#   geom_point(alpha = 0.75) +
+#   ggrepel::geom_text_repel(aes(label = name),
+#                            size = 4, alpha = 0.85) +
+#   scale_color_viridis_c(option = 'C', end = 0.9) +
+#   theme_bw()
+
+
+
 
 # add trendline with geom_smooth, use color for groups
-starwars |>
-  mutate(is_human = species %in% 'Human') |>
-  ggplot(aes(birth_year, height,
-             color = is_human,
-             fill = is_human,
-             )) +
-  geom_point(alpha = 0.75) +
-  geom_smooth(alpha  = 0.25) +
-  scale_x_log10() +
-  theme_bw()
+# starwars |>
+#   mutate(is_human = species %in% 'Human') |>
+#   ggplot(aes(birth_year, height,
+#              color = is_human,
+#              fill = is_human,
+#              )) +
+#   geom_point(alpha = 0.75) +
+#   geom_smooth(alpha  = 0.25) +
+#   scale_x_log10() +
+#   theme_bw()
+
+
+
 
 
 # sometimes we have want separate panels
-starwars |>
-  mutate(is_human = species %in% 'Human') |>
-  ggplot(aes(birth_year, height,
-             color = is_human,
-             fill = is_human,
-  )) +
-  geom_point(alpha = 0.75) +
-  geom_smooth(alpha  = 0.25) +
-  facet_wrap(~is_human, scales = 'free_y', nrow = 2) +
-  scale_x_log10() +
-  theme_bw()
+# starwars |>
+#   mutate(is_human = species %in% 'Human') |>
+#   ggplot(aes(birth_year, height,
+#              color = is_human,
+#              fill = is_human,
+#   )) +
+#   geom_point(alpha = 0.75) +
+#   geom_smooth(alpha  = 0.25) +
+#   facet_wrap(~is_human, scales = 'free_y', nrow = 2) +
+#   scale_x_log10() +
+#   theme_bw()
 
 
 # lets do a plot of the same data that we summarised
 # masses ~ sex
-starwars |>
-  ggplot(aes(
-    x = mass,
-    y = sex,
-    color = sex,
-    fill = sex
-  )) +
-  # geom_jitter(alpha = 0.4, show.legend = F) +
-  # geom_boxplot(alpha = 0, show.legend = F,
-  #              outlier.color = NULL, color = 'gray') +
-  # geom_violin(
-  #   alpha = 0, color = 'grey', fill = 'grey',
-  #   draw_quantiles = c(0.25, 0.5, 0.75)
-  # ) +
-  # ggbeeswarm::geom_beeswarm(
-  #   groupOnX = F,
-  #   alpha = 0.8, shape = 1, size = 0.8
-  # ) +
-  scale_x_log10() +
-  theme_classic()
+# starwars |>
+#   ggplot(aes(
+#     x = mass,
+#     y = sex,
+#     color = sex,
+#     fill = sex
+#   )) +
+#   # geom_jitter(alpha = 0.4, show.legend = F) +
+#   # geom_boxplot(alpha = 0, show.legend = F,
+#   #              outlier.color = NULL, color = 'gray') +
+#   # geom_violin(
+#   #   alpha = 0, color = 'grey', fill = 'grey',
+#   #   draw_quantiles = c(0.25, 0.5, 0.75)
+#   # ) +
+#   # ggbeeswarm::geom_beeswarm(
+#   #   groupOnX = F,
+#   #   alpha = 0.8, shape = 1, size = 0.8
+#   # ) +
+#   scale_x_log10() +
+#   theme_classic()
 
 
 #' learn more about ggplot2 here:
@@ -538,7 +578,7 @@ starwars |>
 
 
 
-
+# other build in datasets: iris, mtcars, diamonds,....
 diamonds |>
   ggplot(aes(carat, price, color = cut)) +
   geom_point(alpha = 0.21, size = 0.21) +
@@ -554,8 +594,10 @@ diamonds |>
 #' *reading and writing files* with `read_*` and `write_*`
 ##----------------------------------------------##
 
-# create a starwars folder that we save files to
-# we can pipe the 'output' suppressWarnings
+#' check your *files pane* to watch changes!
+
+
+# create a starwars folder, suppress warning for existing
 dir.create('starwars')  |> suppressWarnings()
 
 
@@ -602,7 +644,7 @@ readxl::read_excel('starwars/starwars.xlsx')
 
 #' What if we want to *match a pattern* in text data?
 #' Use `str_*` functions from `stringr`
-#'
+
 #' Patterns are regular expressions, *regex*
 #' Here, ` ^ `` indicates the start of the string
 #' [A-Za-z]+ matches any block of letters

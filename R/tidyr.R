@@ -32,8 +32,8 @@ bind_rows(starwars, starwars) |> arrange(name)
 # watch out not to do something nonsensical like this though
 bind_rows(starwars, iris) |> view()
 
-'cols'
 
+'Bind cols'
 # imagine we have a linear model
 model <- lm(mass ~ height, data = starwars)
 summary(model)

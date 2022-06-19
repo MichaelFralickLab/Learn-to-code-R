@@ -12,78 +12,48 @@ fibonacci <- function(n) {
     return(1)
   }
 }
+
 # fibonacci(n = 0)
 fibonacci(n = 1) # yay
 fibonacci(n = 2) # yay
 fibonacci(n = 10) # yay
 fibonacci(n = 1:10) # huh?
-# oh no, our function isn't vectorized!
-# it doesn't accept more than a single value because if/else tests the entire input vector
+
+# this is happening because our function isn't vectorized!
+# it doesn't accept more than a single value because if/else tests the entire input vector at once instead of for each value
 
 # could do iteration with a map
 # get first 10..
-tibble(
+fib10 <- tibble(
   n = 1:10,
   fib = map_dbl(n, .f = fibonacci)
 )
 
-tibble(
-  n = 1:10,
-  fib = map_dbl(n, .f = fibonacci)
-) |>
+fib10 |>
   ggplot(aes(n, fib)) +
   geom_point() +
-  labs(x = 'sequence', y = 'fibonacci')
+  labs(x = 'sequence', y = 'fibonacci number')
 
 
-# do the fibonacci calc from ground up
-# with *memoization*
+# do the fibonacci calc with *memoization*
 fib_seq <- function(n){
-  fib_fill <- rep(NA, times = as.integer(n - 2))
-  fib_list <- c(1, 1, fib_fill) # init
+  # memo store
+  fib_memo <- c(1, 1, rep(NA, times = as.integer(n - 2)))
   purrr::walk(
     .x = seq(3, n),
     .f = ~{
-      fib_list[.x] <<- fib_list[.x - 1] + fib_list[.x - 2] # update
+      # update fib_list in the parent enviroment with <<-
+      fib_memo[.x] <<- fib_memo[.x - 1] + fib_memo[.x - 2]
     }
   )
-  return(fib_list)
+  return(fib_memo)
 }
 
-n <- 100
 
-lm_txt <- function(n = 100){
-  df <- tibble(
-    f = fib_seq(n),
-    lf = lag(f)
-  )
-  m <- lm(f ~ lf, df)
-
-  r2 <- m$qr$qr
-
-}
-
-tibble(
-  x = seq(n),
-  f = fib_seq(n),
-  lf = lag(f)
-) |>
-  ggplot(aes(f, lf)) +
-  geom_smooth() +
-  # geom_text(x = 20, y = 10)
-  geom_point(size = 1)
-
-# take the log2 transformed fib seq.
-fib_data <- tibble(x = seq(n), fib = fib_seq(n), fib_log2 = log2(fib))
-
-# look at how good this linear model fits... it's wrong but so close.
-fib_model <- lm(fib_log2 ~ x, data = fib_data)
-
-
-
-fib_data |> bind_cols(resid = fib_model$residuals) |>
-  ggplot(aes(x, resid)) +
-  geom_point() +
-  geom_smooth()
-
-
+# get first 10000
+n <- 10**4
+fib1000 <- tibble(
+ fib1 = fib_seq(n),
+  # n = seq_along(fib1),
+  # fib = map_dbl(n, .f = fibonacci)
+)

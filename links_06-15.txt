@@ -1,5 +1,0 @@
-June 15th
-
-# starwars.R  : dplyr & ggplot2
-# tidyr - pivot, joins, and nested data
-#

@@ -44,17 +44,6 @@ df |>
   bind_cols(pred_mass = pred_mass) |>
   relocate(contains('mass'))
 
-
-
-
-
-
-
-
-
-
-
-
 #-----------------------------------------------------
 
 #' *Nested data*
@@ -82,9 +71,6 @@ planets <-
   nest(characters = name) |>
   print()
 
-
-
-
 #-----------------------------------------------------
 
 #' *Pivot longer and pivot wider*
@@ -102,12 +88,6 @@ starships_matrix |>
   filter(value) |>
   select(-value)
 
-
-
-
-
-
-
 # using a helper, pivoting, & facetted plots
 starwars |>
   select(name, where(is.numeric)) |>
@@ -115,11 +95,6 @@ starwars |>
   ggplot(aes(x = value)) +
   geom_histogram() +
   facet_wrap(facets = vars(attribute), scales = 'free_x', ncol = 1)
-
-
-
-
-
 
 #-----------------------------------------------------
 
@@ -135,3 +110,7 @@ species_lookup <- starwars |>
 starwars |>
   left_join(species_lookup, by = "species") |>
   glimpse()
+
+
+
+

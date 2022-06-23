@@ -579,19 +579,6 @@ tibble::tibble(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # there are lots of built in datasets in R
 iris |> str()
 

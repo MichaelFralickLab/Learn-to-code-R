@@ -90,13 +90,13 @@ for (x in 1:6) {
 
   # detect win and break
   if (sum(comp$green) == 5) {
-    cat('\\nWINNER!')
+    cat(praise::praise())
     break
   }
 
   # show empty on 0th guess
   if (x == 6) {
-    cat('\nLOSER!\n', str_c(unlist(solution)))
+    cat('\nTry again.\n', str_c(unlist(solution)))
     break
   }
 }

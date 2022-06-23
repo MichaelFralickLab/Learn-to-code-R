@@ -1,0 +1,346 @@
+---
+title: "Gapminder Report"
+author: "Learn to code: seminar 4"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+---------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+We're going to be analyzing some data from the `gapminder` package ()
+```{r}
+# install.packages(c('tidyverse','tidylog','gapminder', 'ggiraph','patchwork','gganimate','ggrepel','modelr'))
+library(tidyverse)
+library(tidylog, warn.conflicts = F)
+library(gapminder)
+library(ggiraph)
+library(patchwork)
+library(gganimate)
+library(ggrepel)
+library(modelr)
+
+ggplot2::theme_set(theme_classic())
+
+```
+
+
+```{r}
+# to assign in global env (look at env pane)
+gapminder <- 
+  gapminder::gapminder |>
+  mutate(country = str_remove_all(country, "'"))
+
+gapminder |> glimpse()
+```
+
+
+- `country` is the unit of observation;  
+- `continent` is a grouping variable for `country`  
+- `time` indicates the ordering of repeated measures on `country`  
+- `lifeExp`, `pop`, `gdpPercap` are the demographics of interest  
+- 60 years of data for each country  
+
+
+
+---------------------------------------------------------
+
+## Create a linear model for each country
+
+Let's create some linear models and talk about how appropriate they are for modelling the increase in life expectancy.
+
+```{r}
+rwanda <- gapminder |> 
+  filter(country %in% 'Rwanda')
+
+# fit a linear model
+model <- lm(lifeExp ~ year, data = rwanda)
+
+rwanda |> 
+  ggplot(aes(year, lifeExp)) +
+  geom_path() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  labs(title = 'linear model: life expectancy ~ year')
+
+rwanda |> 
+  add_predictions(model) |> 
+  add_residuals(model) |> 
+  ggplot(aes(year, resid)) +
+  geom_hline(yintercept = 0, alpha = 0.2) +
+  geom_path() +
+  geom_point() +
+  labs(title = 'linear model residuals')
+```
+
+Now, we want to build a linear model for each country. But we don't want to copy paste those 20 lines for each country (since there are `r gapminder |> distinct(country) |> nrow()` countries).
+
+So we'll create a function `gapminder_model` that subsets the data for each country, fits an lm, then creates our plots
+
+```{r}
+# linear model analysis for a selected country
+gapminder_model <- function(selected){
+  # subset data
+  country <- gapminder |> 
+    filter(country %in% selected)
+  
+  # fit a linear model
+  model <- lm(lifeExp ~ year, data = country)
+  
+  # plot linear model
+  a <- country |> 
+    ggplot(aes(year, lifeExp)) +
+    geom_path() +
+    geom_point() +
+    geom_smooth(method = 'lm') +
+    labs(subtitle = 'life expectancy ~ year')
+  
+  # plot residuals
+  b <- country |> 
+    add_predictions(model) |> 
+    add_residuals(model) |> 
+    ggplot(aes(year, resid)) +
+    geom_hline(yintercept = 0, alpha = 0.2) +
+    geom_path() +
+    geom_point() +
+    labs(subtitle = 'residuals')
+    
+  # using the patchwork package to combine plots
+  a + b & plot_annotation(title = selected)
+}
+
+gapminder_model('Nigeria')
+gapminder_model('China')
+gapminder_model('Cambodia')
+gapminder_model('Canada')
+gapminder_model('Brazil')
+gapminder_model('Iraq')
+```
+
+That's still too laborious! Let's use a more programmatic approach by nesting the data and mapping our function over the list of dataframes.
+
+```{r}
+nested_data <- 
+  gapminder |> 
+  select(continent, country, year, lifeExp) |> 
+  group_by(continent, country) |> 
+  nest(data = c(year, lifeExp)) |> 
+  ungroup()
+```
+
+```{r}
+models <- nested_data |> 
+  mutate(
+    model = map(data, ~lm(lifeExp ~ year, data = .x)),
+    coef = map(model, ~broom::tidy(.x)),
+    quality = map(model, ~broom::glance(.x)),
+    preds = map2(model, data, ~broom::augment(.x, .y))
+  ) |> 
+  glimpse()
+```
+
+## Model coeficients
+
+```{r}
+
+models |> 
+  unnest(coef) |> 
+  filter(term == 'year') |> 
+  mutate(country = fct_reorder(country, estimate)) |> 
+  ggplot(aes(
+    x = continent,
+    y = estimate, 
+    ymin = estimate - std.error,
+    ymax = estimate + std.error
+  )) +
+  geom_pointrange(alpha = 0.5, size = 0.25,
+                  color = 'cornflowerblue',
+                  position = position_jitter(width = 0.35)) +
+  geom_boxplot(fill = NA, outlier.shape = NA) +
+  labs(title = 'Increase in life expectancy per year (linear model)')
+```
+
+## Model quality
+
+```{r}
+models |> 
+  unnest(quality) |> 
+  ggplot(aes(x = r.squared, color = continent, fill = continent)) +
+  geom_histogram(color = 'white') +
+  geom_rug(alpha = 0.5)
+```
+
+
+---------------------------------------------------------
+
+## Multiple plots with facet_*
+
+```{r}
+#' life exp timeseries: trends for each continent
+plt_life_exp <-
+  gapminder |>
+  ggplot(aes(year, lifeExp)) +
+  geom_path(aes(group = country), alpha = 0.12) +
+  geom_smooth(method = 'loess', se = F) +
+  facet_grid(~continent)
+
+plt_life_exp
+```
+
+
+---------------------------------------------------------
+
+## How to best tell the story of this data?
+
+```{r}
+## lifeExp vs gdp: all years
+p1 <- gapminder |>
+  ggplot(aes(gdpPercap, lifeExp, color  = continent, size = pop,
+             label = country)) +
+  geom_point(aes(alpha = year)) +
+  geom_path(aes(group = country), size = 0.2, alpha = 0.3) +
+  scale_x_log10() +
+  scale_alpha(range = c(0.3, 0.8))
+p1
+```
+
+We could add features to explore the data through zooming, hovering, and clicking on the image with `plotly`. This is really easy because we can use the function `ggplotly` that works for most ggplot objects.
+
+```{r}
+plotly::ggplotly(p = p1)
+```
+
+If we were limited to static images, we might simplify the data, or show a sequence of slices.
+
+```{r}
+# lifeExp vs gdp trajectories between 1952-2007
+gapminder |>
+  ggplot(
+    aes(
+      x = gdpPercap, 
+      y = lifeExp,
+      group = country, 
+      color = year,
+      )) +
+  geom_path(alpha = 0.3, size = 1) +
+  scale_x_log10() +
+  facet_wrap(~continent, scales = 'free_y') +
+  scale_color_viridis_c(option = 'E')
+```
+
+
+```{r}
+# lifeExp vs gdp trajectories over 1952-2007
+gapminder |>
+  ggplot(
+    aes(
+      x = gdpPercap, 
+      y = lifeExp,
+      color = continent,
+      size = pop
+      )) +
+  geom_point(alpha = 0.5, shape = 1) +
+  scale_x_log10() +
+  facet_wrap(~year)
+```
+
+
+---------------------------------------------------------
+
+## Animated plots 
+
+```{r}
+# 10 biggest countries to label in animation
+biggest_countries <-
+  gapminder |> 
+  group_by(country) |> 
+  summarise(pop= max(pop)) |> 
+  slice_max(pop, n = 20) |> 
+  pull(country)
+
+# make an plot will all time points...
+p <- gapminder |>
+  ggplot(aes(gdpPercap, lifeExp, color = continent, size = pop)) +
+  geom_point(alpha = 0.5) +
+  ggrepel::geom_text_repel(
+    data = gapminder |> filter(country %in% biggest_countries),
+    aes(label = country),
+    size = 2.5,
+    max.iter = 100,
+    max.overlaps = 250) +
+  scale_x_log10()
+
+# before slicing by year
+p
+
+
+```
+
+Create the animation as a gif 
+
+```{r eval=FALSE}
+# save as a gif
+# specify `year` as the variable that changes between frames
+# add a title so we can see the year for each frame
+animated <- p +
+  transition_states(year,
+                    transition_length = 2,
+                    state_length = 1) +
+  ggtitle('Gapminder data: {closest_state}') +
+  enter_fade() +
+  exit_shrink()
+
+anim_save('gapminder.gif', animation = animated)
+```
+
+<!-- ``` -->
+<!-- <iframe src="https://giphy.com/embed/Pr1kbbDes569lEjqLz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Pr1kbbDes569lEjqLz">via GIPHY</a></p> -->
+<!-- ``` -->
+
+
+<!-- <iframe src="https://giphy.com/embed/Pr1kbbDes569lEjqLz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Pr1kbbDes569lEjqLz">via GIPHY</a></p> -->
+
+
+
+---------------------------------------------------------
+
+## Combine plots with patchwork
+
+```{r}
+## interactive plot --------------------------------------------------------
+
+# use a function to make similar plots with a different variable
+demographic_timeseries <- function(data, demographic){
+  plt <- data |>
+    ggplot(aes(year, {{demographic}},  label = country)) +
+    geom_line_interactive(
+      aes(group = country, data_id = country,
+          tooltip = country, hover_css = "fill:none;"),
+      color = 'darkgray',
+      alpha = 0.3
+    ) +
+    geom_smooth(data, mapping = aes(year, {{demographic}}, group = NULL),
+    method = 'loess', se = F) +
+    facet_grid(~continent) +
+    labs(x = NULL) +
+    theme(axis.text.x = element_text(size = 5))
+  return(plt)
+}
+
+# call our function on each variable to make plots
+plots <- list(
+  pop = gapminder |> demographic_timeseries(pop) + scale_y_log10(),
+  gpd = gapminder |> demographic_timeseries(gdpPercap) + scale_y_log10(),
+  lifexp = gapminder |> demographic_timeseries(lifeExp)
+)
+
+# combine plots into three-part panel
+demo_panel <- patchwork::wrap_plots(plots, ncol = 1)
+demo_panel
+```
+
+
+---------------------------------------------------------

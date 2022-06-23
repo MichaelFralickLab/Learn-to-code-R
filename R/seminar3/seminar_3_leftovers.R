@@ -56,7 +56,7 @@ str_extract(string = string,
 # replace text matching the pattern for phone
 str_replace(string = string,
             pattern = phone_regex,
-            replacement = '<phone number suppressed>')
+            replacement = '<phone number replaced>')
 
 
 

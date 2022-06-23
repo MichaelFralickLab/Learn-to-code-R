@@ -1,0 +1,7 @@
+the plan:
+
+1. clean data
+
+2. model data
+
+3. visualize data

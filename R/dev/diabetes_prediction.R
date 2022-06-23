@@ -26,10 +26,13 @@ pima |>
   geom_density(alpha = 0.25) +
   facet_wrap(~name, scales = 'free')
 
+# set the random numbers to be the same: your (random) splits will match mine
+set.seed(123)
+
 # train-test split
 split <- initial_split(pima, strata = diabetes)
 
-# resamples
+# resamples: 10-fold cross-validation
 cv <- vfold_cv(analysis(split))
 
 # log reg model
@@ -48,12 +51,15 @@ rec <-
 # modelling workflow
 wkflw <- workflow(preprocessor = rec, spec = model_spec)
 
+# optional: parallelize model fitting for speed
 future::multisession(workers = future::availableCores())
+
 # fit models in tuning grid to find best tuning
 rs <- tune_grid(
   object = wkflw,
   resamples = cv,
-  grid = 25,
+  grid = 5,
+  metrics = yardstick::metric_set(roc_auc, ppv, npv),
   control = control_grid(verbose = T, allow_par = T)
 )
 
@@ -84,10 +90,12 @@ roc_pts <- final_perf |>
   roc_curve(truth = diabetes, estimate = .pred_pos) |>
   glimpse()
 
+# plot roc curve
 roc_pts |>
-  ggplot(aes(1-specificity, sensitivity)) +
+  ggplot(aes(1 - specificity, sensitivity)) +
   geom_path() +
-  geom_line(data = tibble(x = c(0, 1), y = c(0,1)), aes(x, y), lty=2) +
+  geom_line(data = tibble(x = c(0, 1), y = c(0, 1)),
+            aes(x, y), lty = 2) +
   coord_equal() +
   labs(
     title = "Final model: ",

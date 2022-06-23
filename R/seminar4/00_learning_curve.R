@@ -6,5 +6,7 @@ tibble(
 ) |>
   ggplot(aes(x, sigmoid)) +
   geom_point(shape = 1) +
-  labs(y = 'power', x = 'effort', title = 'R learning curve')
+  labs(y = 'power', x = 'effort',
+       title = 'R learning curve',
+       subtitle = 'Practice & patience are the keys to progress')
 

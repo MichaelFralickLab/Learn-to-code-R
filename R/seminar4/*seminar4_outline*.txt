@@ -1,3 +1,4 @@
+
 Learn To Code R - Seminar 4 Lesson Plan:
 --------------------------------------------------
 
@@ -11,4 +12,4 @@ Learn To Code R - Seminar 4 Lesson Plan:
 
 - Visualize data in 03_gapminder.Rmd
 
-- Report cards from 04_report
+- Report cards from 04_report_cards.R

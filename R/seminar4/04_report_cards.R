@@ -1,6 +1,6 @@
 # Surprise! Mike has asked me to prepare an evaluation of your skills. I've prepared report cards for each of you!
 
-#' `Run this script`, then try `render_report_card('your full name')` in the terminal to get your report
+#' `Run this script`, then try `report_card('your full name')` in the terminal to get your report
 
 # install.packages(c('beepr', 'cowsay','emojifont','praise'))
 
@@ -53,8 +53,10 @@ report_card <- function(student_name) {
         stringr::str_split('') |>
         purrr::flatten_chr()
     ) |>
-      dplyr::left_join(by = "x",
-                       tibble::tibble(x = letters, value = seq_along(letters))) |>
+      dplyr::left_join(
+        tibble::tibble(x = letters, value = seq_along(letters)),
+        by = "x"
+      ) |>
       dplyr::pull(value) |>
       sum() |>
       as.integer()
@@ -71,7 +73,8 @@ report_card <- function(student_name) {
       stringr::str_glue() |>
       crayon::bgBlue() |>
       cat()
-    report_card |>  cat()
+    report_card |>
+      cat()
   }
   render_report_card(student_name)
 }

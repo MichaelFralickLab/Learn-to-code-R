@@ -2,16 +2,21 @@
 title: "Gapminder Report"
 author: "Learn to code: seminar 4"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    theme: journal
+    code_folding: hide
 ---
 
 ---------------------------------------------------------
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = F, cache = F, message = F, warning = F,
+                      fig.height = 3, fig.width = 5, fig.align = 'center')
 ```
 
-We're going to be analyzing some data from the `gapminder` package ()
+We're going to be analyzing some data from the `gapminder` package.
+
 ```{r}
 # install.packages(c('tidyverse','tidylog','gapminder', 'ggiraph','patchwork','gganimate','ggrepel','modelr'))
 library(tidyverse)
@@ -23,18 +28,16 @@ library(gganimate)
 library(ggrepel)
 library(modelr)
 
-ggplot2::theme_set(theme_classic())
+ggplot2::theme_set(theme_minimal())
 
 ```
 
 
 ```{r}
-# to assign in global env (look at env pane)
+# assign in global env (look at env pane)
 gapminder <- 
   gapminder::gapminder |>
   mutate(country = str_remove_all(country, "'"))
-
-gapminder |> glimpse()
 ```
 
 
@@ -52,7 +55,7 @@ gapminder |> glimpse()
 
 Let's create some linear models and talk about how appropriate they are for modelling the increase in life expectancy.
 
-```{r}
+```{r fig.height=3, fig.width=3}
 rwanda <- gapminder |> 
   filter(country %in% 'Rwanda')
 
@@ -76,7 +79,7 @@ rwanda |>
   labs(title = 'linear model residuals')
 ```
 
-Now, we want to build a linear model for each country. But we don't want to copy paste those 20 lines for each country (since there are `r gapminder |> distinct(country) |> nrow()` countries).
+Now, we want to build a linear model for each country. But we don't want to copy paste those 20 lines for each country (since there are `r gapminder |> dplyr::distinct(country) |> nrow()` countries).
 
 So we'll create a function `gapminder_model` that subsets the data for each country, fits an lm, then creates our plots
 
@@ -113,12 +116,14 @@ gapminder_model <- function(selected){
 }
 
 gapminder_model('Nigeria')
-gapminder_model('China')
-gapminder_model('Cambodia')
-gapminder_model('Canada')
-gapminder_model('Brazil')
-gapminder_model('Iraq')
 ```
+
+
+```{r}
+gapminder_model('Canada')
+```
+
+---
 
 That's still too laborious! Let's use a more programmatic approach by nesting the data and mapping our function over the list of dataframes.
 
@@ -165,12 +170,12 @@ models |>
 
 ## Model quality
 
-```{r}
+```{r fig.height=3, fig.width=4}
 models |> 
   unnest(quality) |> 
   ggplot(aes(x = r.squared, color = continent, fill = continent)) +
   geom_histogram(color = 'white') +
-  geom_rug(alpha = 0.5)
+  geom_rug(alpha = 0.5) 
 ```
 
 
@@ -178,14 +183,16 @@ models |>
 
 ## Multiple plots with facet_*
 
-```{r}
+```{r fig.height=2.9, fig.width=6}
 #' life exp timeseries: trends for each continent
 plt_life_exp <-
   gapminder |>
   ggplot(aes(year, lifeExp)) +
   geom_path(aes(group = country), alpha = 0.12) +
   geom_smooth(method = 'loess', se = F) +
-  facet_grid(~continent)
+  facet_grid(~continent) +
+  scale_x_continuous(breaks = c(1960, 1980, 2000)) +
+  theme(axis.text.x = element_text(size = 6))
 
 plt_life_exp
 ```
@@ -195,7 +202,9 @@ plt_life_exp
 
 ## How to best tell the story of this data?
 
-```{r}
+Let's switch gears and talk about how to effectively visualize the trends in life expectancy and GDP over time.
+
+```{r fig.height=5.5, fig.width=6}
 ## lifeExp vs gdp: all years
 p1 <- gapminder |>
   ggplot(aes(gdpPercap, lifeExp, color  = continent, size = pop,
@@ -209,13 +218,13 @@ p1
 
 We could add features to explore the data through zooming, hovering, and clicking on the image with `plotly`. This is really easy because we can use the function `ggplotly` that works for most ggplot objects.
 
-```{r}
+```{r fig.height=5.5, fig.width=6}
 plotly::ggplotly(p = p1)
 ```
 
 If we were limited to static images, we might simplify the data, or show a sequence of slices.
 
-```{r}
+```{r fig.height=6, fig.width=6}
 # lifeExp vs gdp trajectories between 1952-2007
 gapminder |>
   ggplot(
@@ -232,7 +241,7 @@ gapminder |>
 ```
 
 
-```{r}
+```{r fig.height=6, fig.width=6}
 # lifeExp vs gdp trajectories over 1952-2007
 gapminder |>
   ggplot(
@@ -252,7 +261,7 @@ gapminder |>
 
 ## Animated plots 
 
-```{r}
+```{r fig.height=6, fig.width=6}
 # 10 biggest countries to label in animation
 biggest_countries <-
   gapminder |> 
@@ -285,6 +294,7 @@ Create the animation as a gif
 # save as a gif
 # specify `year` as the variable that changes between frames
 # add a title so we can see the year for each frame
+library(gganimate)
 animated <- p +
   transition_states(year,
                     transition_length = 2,
@@ -295,27 +305,20 @@ animated <- p +
 
 anim_save('gapminder.gif', animation = animated)
 ```
-
-<!-- ``` -->
-<!-- <iframe src="https://giphy.com/embed/Pr1kbbDes569lEjqLz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Pr1kbbDes569lEjqLz">via GIPHY</a></p> -->
-<!-- ``` -->
-
-
-<!-- <iframe src="https://giphy.com/embed/Pr1kbbDes569lEjqLz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Pr1kbbDes569lEjqLz">via GIPHY</a></p> -->
-
-
+ 
 
 ---------------------------------------------------------
 
 ## Combine plots with patchwork
 
-```{r}
+```{r fig.height=6, fig.width=6}
 ## interactive plot --------------------------------------------------------
 
 # use a function to make similar plots with a different variable
 demographic_timeseries <- function(data, demographic){
   plt <- data |>
     ggplot(aes(year, {{demographic}},  label = country)) +
+    scale_x_continuous(breaks = c(1960, 1980, 2000)) +
     geom_line_interactive(
       aes(group = country, data_id = country,
           tooltip = country, hover_css = "fill:none;"),

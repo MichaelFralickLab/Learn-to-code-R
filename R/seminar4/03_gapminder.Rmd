@@ -11,8 +11,10 @@ output:
 ---------------------------------------------------------
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, cache = F, message = F, warning = F,
-                      fig.height = 3, fig.width = 5, fig.align = 'center')
+knitr::opts_chunk$set(
+  echo = T, cache = F, message = F, warning = F,
+  fig.height = 3, fig.width = 5, fig.align = 'center'
+  )
 ```
 
 We're going to be analyzing some data from the `gapminder` package.
@@ -23,6 +25,7 @@ library(tidyverse)
 library(tidylog, warn.conflicts = F)
 library(gapminder)
 library(ggiraph)
+library(ggrepel)
 library(patchwork)
 library(gganimate)
 library(ggrepel)
@@ -103,8 +106,8 @@ gapminder_model <- function(selected){
   
   # plot residuals
   b <- country |> 
-    add_predictions(model) |> 
-    add_residuals(model) |> 
+    modelr::add_predictions(model) |> 
+    modelr::add_residuals(model) |> 
     ggplot(aes(year, resid)) +
     geom_hline(yintercept = 0, alpha = 0.2) +
     geom_path() +
@@ -235,9 +238,11 @@ gapminder |>
       color = year,
       )) +
   geom_path(alpha = 0.3, size = 1) +
-  scale_x_log10() +
-  facet_wrap(~continent, scales = 'free_y') +
-  scale_color_viridis_c(option = 'E')
+  facet_wrap(~continent, scales = 'fixed') +
+  scale_x_log10(breaks = 10**(3:5), labels = c('1', '10', '100')) +
+  scale_color_viridis_c(option = 'E') +
+  labs(x = 'GDP per capita (thousands of dollars)',
+       y = 'Life Expectancy')
 ```
 
 
@@ -252,8 +257,10 @@ gapminder |>
       size = pop
       )) +
   geom_point(alpha = 0.5, shape = 1) +
-  scale_x_log10() +
-  facet_wrap(~year)
+  scale_x_log10(breaks = 10**(3:5), labels = c('1', '10', '100')) +
+  facet_wrap(~year) +
+  labs(x = 'GDP per capita (thousands of dollars)',
+       y = 'Life Expectancy')
 ```
 
 
@@ -288,13 +295,16 @@ p
 
 ```
 
-Create the animation as a gif 
+### Create an animation gif 
+
+This gif isn't easy to get to display within Rmarkdown, so try calling `animated` in the console to see the gif in RStudio's viewer pane! The 'Eval' option is set to false on this chunk so that the markdown doesn't create the animation where rendering the html.
 
 ```{r eval=FALSE}
 # save as a gif
 # specify `year` as the variable that changes between frames
 # add a title so we can see the year for each frame
 library(gganimate)
+library(gifski) # you might need to install this!
 animated <- p +
   transition_states(year,
                     transition_length = 2,

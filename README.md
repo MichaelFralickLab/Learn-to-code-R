@@ -2,37 +2,38 @@
   
 ### Schedule 2022
 
-#### June 2: R 101
+#### June 2: R Intro
 
 - Orientation in Rstudio
-- First demo
+- Alien signals demo
 - Map demo
 - R syntax
-- primitive data types
+- Data types
 
 #### June 9: Data analysis I
 
-- sets of data: vectors, lists, data.frames, and tibbles
-- math and logic
-- operators and functions
-- if/else
-- user-defined functions
+- Sets of data: vectors, lists, data.frames, and tibbles
+- Math and logic
+- Operators and functions
+- If/else
+- User-defined functions
 
 #### June 16: Data analysis II
 
-- manipulating tables with `dplyr`
-- summary statistics
-- read and write files
-- plotting with `ggplot2` and extensions
-- Regular expressions and string interpolation
-- Nested data
+- Manipulating tables with `dplyr`
+- Summary statistics
+- Read and write files
+- Plotting with `ggplot2` and extensions
+
 
 #### June 23
 
-- pivots, joins, and functional programming
-- Reporting with Rmarkdown
-- Interactive figures with ggiraph
-- Version control with git and Github
+- Data wrangling and cleaning, pivots, and joins
+- Regular expressions and string interpolation
+- Nested data, functional programming, and modeling 
+- Storytelling with plots
+- Interactive figures with ggiraph & plotly
+
 
 
 ------
@@ -52,11 +53,11 @@ Look into the `usethis` package to setup Github in Rstudio
 
 ## R for data science
 
-here - 
+https://r4ds.had.co.nz/
 
 ## tidyverse documentation / cheatsheets
 
-here - 
+www.tidyverse.org
 
 ## Data handling practices
 
